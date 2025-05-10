@@ -1,4 +1,5 @@
-use super::{memory::Memory, registers::Registers};
+use super::instructions::{brk, lda};
+use super::{memory::Memory, registers::Registers}; // zakładając, że masz moduł brk
 
 pub struct Cpu {
     pub(super) registers: Registers,
@@ -16,8 +17,8 @@ impl Cpu {
             exit: false,
         };
 
-        cpu.instructions[0xA9] = Cpu::lda_0xa9;
-        cpu.instructions[0x00] = Cpu::brk_0x00;
+        cpu.instructions[0xA9] = lda::lda_0xa9;
+        cpu.instructions[0x00] = brk::brk_0x00;
 
         cpu
     }
@@ -29,7 +30,7 @@ impl Cpu {
         );
     }
 
-    pub fn fetch_byte(&mut self) -> u8 {
+    pub(super) fn fetch_byte(&mut self) -> u8 {
         let val = self.memory.data[self.registers.pc as usize];
         self.registers.pc += 1;
         return val;
