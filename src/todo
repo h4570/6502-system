@@ -1,0 +1,105 @@
+// ==== Specyfikacja
+// == RAM - 64KB
+// == Magistrala danych
+//    - Jest czysto hipotetyczna, bo w kodzie dla uproszczenia nie istnieje
+//    - Wspiera dwa urządzenia na raz, zatem DMA nie blokuje CPU
+// == CPU - 6502
+//   - Zestaw instrukcji z klasycznego 6502
+//   - Zegar 4MHz. Teoretycznie powinienem albo ustawić 1MHz, albo zostawić 4MHz ale wtedy
+//     zaimplementować procesor 65C02, ale mi się tego nie chce robić.
+// == GPU
+//  - 1MHz
+//  - 256x240, 4bpp (paleta VGA, 16 kolorów)
+//  - 64KB pamięci VRAM (starczy na double buffering)
+//  - 1 bufor - 30720 bytes = 30.7KB
+//  - Transfer danych odbywa się poprzez kontroler DMA
+//  - Przykład rejestrów: (mapowane są do konkretnych adresów 6502 (auto sync))
+//    - Rejestr kontrolny (włączenie/wyłączenie układu, wybór trybu kolorów)
+//    - Rejestr aktywnego bufora (0 = pierwszy, 1 = drugi)
+//    - Rejestr statusu (VSYNC, HSYNC, inne flagi)
+//    - Rejestr przerwań (włączenie/wyłączenie przerwań VSYNC/HSYNC)
+// == DMA
+//  - 1MHz
+//  - Transferuje dane z pamięci 6502 do GPU
+//  - Nie zatrzymuje CPU na czas transferu (bo magistrala pozwala na 2 urządzenia)
+//  - Transfer 1 bajtu to 1 cykl
+//  - Przykład rejestrów: (mapowane są do konkretnych adresów 6502 (auto sync))
+//    - Rejestr adresu źródłowego (skąd dane są pobierane z pamięci CPU)
+//    - Rejestr adresu docelowego (gdzie dane będą zapisywane w VRAM)
+//    - Rejestr długości transferu (ile bajtów ma zostać przeniesionych)
+//    - Rejestr kontrolny (start/stop, kierunek transferu, flagi statusu)
+
+// ==== TODO:
+// == CPU - Wyciągniecie ramu poza CPU
+// == CPU - Obsługa instrukcji
+// STX - store X
+// STY - store Y
+
+// TAX - transfer accumulator to X
+// TAY - transfer accumulator to Y
+// TSX - transfer stack pointer to X
+// TXA - transfer X to accumulator
+// TXS - transfer X to stack pointer
+// TYA - transfer Y to accumulator
+
+// ADC - add with carry
+// SBC - subtract with carry
+// AND - and (with accumulator)
+// ORA - or with accumulator
+// EOR - exclusive or (with accumulator)
+
+// INC - increment
+// INX - increment X
+// INY - increment Y
+// DEC - decrement
+// DEX - decrement X
+// DEY - decrement Y
+
+// JMP - jump
+// CMP - compare (with accumulator)
+// CPX - compare with X
+// CPY - compare with Y
+
+// BEQ - branch on equal (zero set)
+// BNE - branch on not equal (zero clear)
+// BCC - branch on carry clear
+// BCS - branch on carry set
+// BMI - branch on minus (negative set)
+// BPL - branch on plus (negative clear)
+
+// PHA - push accumulator
+// PLA - pull accumulator
+// JSR - jump subroutine
+// RTS - return from subroutine
+// ASL - arithmetic shift left
+// BIT - bit test
+
+// BVC - branch on overflow clear
+// BVS - branch on overflow set
+// CLC - clear carry
+// CLD - clear decimal
+// CLI - clear interrupt disable
+// CLV - clear overflow
+
+// LSR - logical shift right
+// NOP - no operation
+// PHP - push processor status (SR)
+// PLP - pull processor status (SR)
+// ROL - rotate left
+// ROR - rotate right
+
+// RTI - return from interrupt
+// SEC - set carry
+// SED - set decimal
+// SEI - set interrupt disable
+
+// == CPU - Obsługa cykli
+// == CPU - Dodanie "-i / --input mem.bin", który wciągnie konkretny plik
+// == CPU - Dodanie "-dm / --dump-mem mem.bin", który zrzuci pamięć po zakończeniu programu
+// == CPU - Napisanie prostego programu w C za pomocą kompilatora cc65
+
+// == GPU - Napisanie bazy (pamięć, rejestry)
+// == GPU - Utworzenie okienka
+// == GPU - Wyświetlanie co 0,5s jednego z buforów na zmianę
+
+// == DMA

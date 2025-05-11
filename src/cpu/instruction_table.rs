@@ -1,23 +1,6 @@
 use super::instructions::{brk, lda, ldx, ldy, sta};
 use crate::cpu::cpu::Cpu;
 
-// TODO:
-// Podstawowe instrukcje transferu danych
-//   STX/STY - Zapisywanie wartości z rejestrów do pamięci
-//   TAX/TAY/TXA/TYA - Transfer między rejestrami
-// Operacje arytmetyczne i logiczne
-//   ADC/SBC - Dodawanie/odejmowanie z przenoszeniem
-//   AND/ORA/EOR - Operacje logiczne (AND, OR, XOR)
-//   INC/DEC - Inkrementacja/dekrementacja pamięci
-//   INX/INY/DEX/DEY - Inkrementacja/dekrementacja rejestrów
-// Instrukcje porównania i skoków
-//   CMP/CPX/CPY - Porównanie
-//   JMP - Skok bezwarunkowy
-//   BEQ/BNE/BCS/BCC/BMI/BPL - Skoki warunkowe
-// Dodatkowe operacje
-//   PHA/PLA - Operacje na stosie
-//   JSR/RTS - Podprogramy
-
 pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> u8; 256]) {
     // LDA
     cpu_instructions[0xA9] = lda::lda_0xa9;
