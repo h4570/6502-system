@@ -3,7 +3,7 @@
 version = 4
 
 [[package]]
-name = "emulator-practice"
+name = "emulator-6502"
 version = "0.1.0"
 dependencies = [
  "log",
