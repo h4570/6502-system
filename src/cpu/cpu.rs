@@ -1,18 +1,16 @@
-use super::{
-    flags::Flags, instruction_table::arrange_instruction_table, memory::Memory,
-    registers::Registers,
-};
+use super::{flags::Flags, instruction_table::arrange_instruction_table, registers::Registers};
+use crate::mem::ram::Ram;
 
 pub struct Cpu {
     pub(super) registers: Registers,
-    pub(super) memory: Memory,
+    pub(super) memory: Ram,
     pub(super) flags: Flags,
     pub(super) instructions: [fn(&mut Cpu) -> u8; 256],
     pub(super) exit: bool,
 }
 
 impl Cpu {
-    pub fn new() -> Self {
+    pub fn new(ram: Ram) -> Self {
         let mut cpu = Cpu {
             registers: Registers {
                 a: 0,
@@ -21,7 +19,7 @@ impl Cpu {
                 pc: 0,
             },
             flags: Flags { z: 0, n: 0 },
-            memory: Memory { data: [0; 65536] },
+            memory: ram,
             instructions: [Cpu::unknown_opcode; 256],
             exit: false,
         };

@@ -31,11 +31,7 @@
 //    - Rejestr kontrolny (start/stop, kierunek transferu, flagi statusu)
 
 // ==== TODO:
-// == CPU - Wyciągniecie ramu poza CPU
 // == CPU - Obsługa instrukcji
-// STX - store X
-// STY - store Y
-
 // TAX - transfer accumulator to X
 // TAY - transfer accumulator to Y
 // TSX - transfer stack pointer to X

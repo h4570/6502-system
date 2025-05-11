@@ -1,10 +1,11 @@
 #[cfg(test)]
 mod sta_tests {
     use crate::cpu::cpu::Cpu;
+    use crate::mem::ram::Ram;
 
     #[test]
     fn test_sta_zeropage() {
-        let mut cpu = Cpu::new();
+        let mut cpu = Cpu::new(Ram::new());
         cpu.registers.a = 0x42;
         let program = vec![0x85, 0x20, 0x00]; // STA $20, BRK
         cpu.load_program(&program, 0x8000);
@@ -14,7 +15,7 @@ mod sta_tests {
 
     #[test]
     fn test_sta_zeropage_x() {
-        let mut cpu = Cpu::new();
+        let mut cpu = Cpu::new(Ram::new());
         cpu.registers.a = 0x42;
         cpu.registers.x = 0x05;
         let program = vec![0x95, 0x20, 0x00]; // STA $20,X, BRK
@@ -25,7 +26,7 @@ mod sta_tests {
 
     #[test]
     fn test_sta_absolute() {
-        let mut cpu = Cpu::new();
+        let mut cpu = Cpu::new(Ram::new());
         cpu.registers.a = 0x42;
         let program = vec![0x8D, 0x00, 0x40, 0x00]; // STA $4000, BRK
         cpu.load_program(&program, 0x8000);
@@ -35,7 +36,7 @@ mod sta_tests {
 
     #[test]
     fn test_sta_absolute_x() {
-        let mut cpu = Cpu::new();
+        let mut cpu = Cpu::new(Ram::new());
         cpu.registers.a = 0x42;
         cpu.registers.x = 0x08;
         let program = vec![0x9D, 0x00, 0x40, 0x00]; // STA $4000,X, BRK
@@ -46,7 +47,7 @@ mod sta_tests {
 
     #[test]
     fn test_sta_absolute_x_page_cross() {
-        let mut cpu = Cpu::new();
+        let mut cpu = Cpu::new(Ram::new());
         cpu.registers.a = 0x42;
         cpu.registers.x = 0xFF;
         let program = vec![0x9D, 0x00, 0x40, 0x00]; // STA $4000,X, BRK
@@ -57,7 +58,7 @@ mod sta_tests {
 
     #[test]
     fn test_sta_absolute_y() {
-        let mut cpu = Cpu::new();
+        let mut cpu = Cpu::new(Ram::new());
         cpu.registers.a = 0x42;
         cpu.registers.y = 0x08;
         let program = vec![0x99, 0x00, 0x40, 0x00]; // STA $4000,Y, BRK
@@ -68,7 +69,7 @@ mod sta_tests {
 
     #[test]
     fn test_sta_absolute_y_page_cross() {
-        let mut cpu = Cpu::new();
+        let mut cpu = Cpu::new(Ram::new());
         cpu.registers.a = 0x42;
         cpu.registers.y = 0xFF;
         let program = vec![0x99, 0x00, 0x40, 0x00]; // STA $4000,Y, BRK
@@ -79,7 +80,7 @@ mod sta_tests {
 
     #[test]
     fn test_sta_indirect_x() {
-        let mut cpu = Cpu::new();
+        let mut cpu = Cpu::new(Ram::new());
         cpu.registers.a = 0x42;
         cpu.registers.x = 0x04;
         // Set up the indirect pointer
@@ -93,7 +94,7 @@ mod sta_tests {
 
     #[test]
     fn test_sta_indirect_y() {
-        let mut cpu = Cpu::new();
+        let mut cpu = Cpu::new(Ram::new());
         cpu.registers.a = 0x42;
         cpu.registers.y = 0x04;
         // Set up the indirect pointer
@@ -107,7 +108,7 @@ mod sta_tests {
 
     #[test]
     fn test_sta_indirect_y_page_cross() {
-        let mut cpu = Cpu::new();
+        let mut cpu = Cpu::new(Ram::new());
         cpu.registers.a = 0x42;
         cpu.registers.y = 0xFF;
         // Set up the indirect pointer
