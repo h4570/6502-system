@@ -1,9 +1,9 @@
-use super::instructions::{brk, lda, ldx, ldy};
+use super::instructions::{brk, lda, ldx, ldy, sta};
 use crate::cpu::cpu::Cpu;
 
 // TODO:
 // Podstawowe instrukcje transferu danych
-//   STA/STX/STY - Zapisywanie wartości z rejestrów do pamięci
+//   STX/STY - Zapisywanie wartości z rejestrów do pamięci
 //   TAX/TAY/TXA/TYA - Transfer między rejestrami
 // Operacje arytmetyczne i logiczne
 //   ADC/SBC - Dodawanie/odejmowanie z przenoszeniem
@@ -40,6 +40,14 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0xB4] = ldy::ldy_0xb4;
     cpu_instructions[0xAC] = ldy::ldy_0xac;
     cpu_instructions[0xBC] = ldy::ldy_0xbc;
+    // STA
+    cpu_instructions[0x85] = sta::sta_0x85;
+    cpu_instructions[0x95] = sta::sta_0x95;
+    cpu_instructions[0x8D] = sta::sta_0x8d;
+    cpu_instructions[0x9D] = sta::sta_0x9d;
+    cpu_instructions[0x99] = sta::sta_0x99;
+    cpu_instructions[0x81] = sta::sta_0x81;
+    cpu_instructions[0x91] = sta::sta_0x91;
     // BRK
     cpu_instructions[0x00] = brk::brk_0x00;
 }

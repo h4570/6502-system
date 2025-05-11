@@ -82,6 +82,6 @@ pub(crate) fn lda_0xb1(cpu: &mut Cpu) -> u8 {
     let val = cpu.memory.data[addr as usize];
     set_val(cpu, val);
 
-    trace!("LDA[0xB1] (Indirect,Y)");
+    trace!("LDA[0xB1] (Indirect),Y");
     if page_crossed { 6 } else { 5 }
 }
