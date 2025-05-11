@@ -70,6 +70,8 @@ impl Cpu {
     }
 
     pub fn run(&mut self) {
+        let mut _total_cycles: u64 = 0;
+
         loop {
             let opcode = self.fetch_byte();
 
@@ -78,7 +80,9 @@ impl Cpu {
             }
 
             let instruction = self.instructions[opcode as usize];
-            let _cycles: u8 = instruction(self);
+            let cycles: u8 = instruction(self);
+
+            _total_cycles += cycles as u64;
 
             if self.exit {
                 break;

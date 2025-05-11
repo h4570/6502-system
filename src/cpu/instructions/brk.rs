@@ -1,7 +1,8 @@
 use crate::cpu::cpu::Cpu;
+use log::trace;
 
 pub(crate) fn brk_0x00(cpu: &mut Cpu) -> u8 {
     cpu.exit = true;
-    println!("Opcode: 0x00");
+    trace!("BRK[0x00]");
     1
 }
