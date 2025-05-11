@@ -1,5 +1,7 @@
-use super::instructions::{brk, lda};
-use super::{flags::Flags, memory::Memory, registers::Registers}; // zakładając, że masz moduł brk
+use super::{
+    flags::Flags, instruction_table::arrange_instruction_table, memory::Memory,
+    registers::Registers,
+};
 
 pub struct Cpu {
     pub(super) registers: Registers,
@@ -24,17 +26,7 @@ impl Cpu {
             exit: false,
         };
 
-        // LDA
-        cpu.instructions[0xA9] = lda::lda_0xa9;
-        cpu.instructions[0xA5] = lda::lda_0xa5;
-        cpu.instructions[0xB5] = lda::lda_0xb5;
-        cpu.instructions[0xAD] = lda::lda_0xad;
-        cpu.instructions[0xBD] = lda::lda_0xbd;
-        cpu.instructions[0xB9] = lda::lda_0xb9;
-        cpu.instructions[0xA1] = lda::lda_0xa1;
-        cpu.instructions[0xB1] = lda::lda_0xb1;
-        // BRK
-        cpu.instructions[0x00] = brk::brk_0x00;
+        arrange_instruction_table(&mut cpu.instructions);
 
         cpu
     }
