@@ -32,10 +32,6 @@
 
 // ==== TODO:
 // == CPU - Obsługa instrukcji
-// CMP - compare (with accumulator)
-// CPX - compare with X
-// CPY - compare with Y
-
 // BEQ - branch on equal (zero set)
 // BNE - branch on not equal (zero clear)
 // BCC - branch on carry clear
