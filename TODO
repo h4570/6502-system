@@ -32,7 +32,6 @@
 
 // ==== TODO:
 // == CPU - Obsługa instrukcji
-// JMP - jump
 // CMP - compare (with accumulator)
 // CPX - compare with X
 // CPY - compare with Y
@@ -59,7 +58,6 @@
 // CLV - clear overflow
 
 // LSR - logical shift right
-// NOP - no operation
 // PHP - push processor status (SR)
 // PLP - pull processor status (SR)
 // ROL - rotate left

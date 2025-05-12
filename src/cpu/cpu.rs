@@ -69,6 +69,7 @@ impl Cpu {
 
     pub fn run(&mut self) {
         let mut _total_cycles: u64 = 0;
+        let mut max_iterations: u32 = 10000; // Add a safety limit to prevent infinite loops in tests
 
         loop {
             let opcode = self.fetch_byte();
@@ -82,7 +83,8 @@ impl Cpu {
 
             _total_cycles += cycles as u64;
 
-            if self.exit {
+            max_iterations -= 1;
+            if self.exit || max_iterations == 0 {
                 break;
             }
         }
