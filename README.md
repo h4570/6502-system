@@ -1,6 +1,6 @@
 # 6502 Computer System Emulator
 
-This project is an emulator for a hypothetical computer system based on the classic 6502 CPU with custom GPU and DMA controllers.
+This project is an emulator for a hypothetical computer system based on the classic 6502 CPU with custom GPU and DMA controller.
 
 ## System Specifications
 
