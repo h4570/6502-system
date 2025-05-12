@@ -1,5 +1,6 @@
 pub mod adc;
 pub mod addr_utils;
+pub mod and;
 pub mod brk;
 pub mod lda;
 pub mod ldx;
