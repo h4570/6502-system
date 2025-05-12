@@ -2,6 +2,7 @@ pub mod adc_tests;
 pub mod lda_tests;
 pub mod ldx_tests;
 pub mod ldy_tests;
+pub mod sbc_tests;
 pub mod sta_tests;
 pub mod stx_tests;
 pub mod sty_tests;

@@ -32,8 +32,6 @@
 
 // ==== TODO:
 // == CPU - Obsługa instrukcji
-// ADC - add with carry
-// SBC - subtract with carry
 // AND - and (with accumulator)
 // ORA - or with accumulator
 // EOR - exclusive or (with accumulator)

@@ -4,6 +4,7 @@ pub mod brk;
 pub mod lda;
 pub mod ldx;
 pub mod ldy;
+pub mod sbc;
 pub mod sta;
 pub mod stx;
 pub mod sty;
