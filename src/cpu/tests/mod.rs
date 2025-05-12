@@ -1,8 +1,10 @@
 pub mod adc_tests;
 pub mod and_tests;
+pub mod eor_tests;
 pub mod lda_tests;
 pub mod ldx_tests;
 pub mod ldy_tests;
+pub mod ora_tests;
 pub mod sbc_tests;
 pub mod sta_tests;
 pub mod stx_tests;

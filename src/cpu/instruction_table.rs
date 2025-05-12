@@ -1,5 +1,5 @@
 use super::instructions::{
-    adc, and, brk, lda, ldx, ldy, sbc, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
+    adc, and, brk, eor, lda, ldx, ldy, ora, sbc, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
 };
 use crate::cpu::cpu::Cpu;
 
@@ -82,4 +82,22 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0xF1] = sbc::sbc_0xf1;
     // BRK
     cpu_instructions[0x00] = brk::brk_0x00;
+    // ORA
+    cpu_instructions[0x09] = ora::ora_0x09;
+    cpu_instructions[0x05] = ora::ora_0x05;
+    cpu_instructions[0x15] = ora::ora_0x15;
+    cpu_instructions[0x0D] = ora::ora_0x0d;
+    cpu_instructions[0x1D] = ora::ora_0x1d;
+    cpu_instructions[0x19] = ora::ora_0x19;
+    cpu_instructions[0x01] = ora::ora_0x01;
+    cpu_instructions[0x11] = ora::ora_0x11;
+    // EOR
+    cpu_instructions[0x49] = eor::eor_0x49;
+    cpu_instructions[0x45] = eor::eor_0x45;
+    cpu_instructions[0x55] = eor::eor_0x55;
+    cpu_instructions[0x4D] = eor::eor_0x4d;
+    cpu_instructions[0x5D] = eor::eor_0x5d;
+    cpu_instructions[0x59] = eor::eor_0x59;
+    cpu_instructions[0x41] = eor::eor_0x41;
+    cpu_instructions[0x51] = eor::eor_0x51;
 }
