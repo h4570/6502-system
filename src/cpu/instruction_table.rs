@@ -1,5 +1,5 @@
 use super::instructions::{
-    adc, and, brk, eor, inc, inx, iny, lda, ldx, ldy, ora, sbc, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
+    adc, and, brk, dec, dex, dey, eor, inc, inx, iny, lda, ldx, ldy, ora, sbc, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
 };
 use crate::cpu::cpu::Cpu;
 
@@ -109,4 +109,13 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0xE8] = inx::inx_0xe8;
     // INY
     cpu_instructions[0xC8] = iny::iny_0xc8;
+    // DEC
+    cpu_instructions[0xC6] = dec::dec_0xc6;
+    cpu_instructions[0xD6] = dec::dec_0xd6;
+    cpu_instructions[0xCE] = dec::dec_0xce;
+    cpu_instructions[0xDE] = dec::dec_0xde;
+    // DEX
+    cpu_instructions[0xCA] = dex::dex_0xca;
+    // DEY
+    cpu_instructions[0x88] = dey::dey_0x88;
 }

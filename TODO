@@ -32,13 +32,6 @@
 
 // ==== TODO:
 // == CPU - Obsługa instrukcji
-// INC - increment
-// INX - increment X
-// INY - increment Y
-// DEC - decrement
-// DEX - decrement X
-// DEY - decrement Y
-
 // JMP - jump
 // CMP - compare (with accumulator)
 // CPX - compare with X
