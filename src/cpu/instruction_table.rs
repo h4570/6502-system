@@ -1,5 +1,5 @@
 use super::instructions::{
-    adc, and, brk, dec, dex, dey, eor, inc, inx, iny, jmp, lda, ldx, ldy, nop, ora, sbc, sta, stx, sty,
+    adc, and, brk, cmp, cpx, cpy, dec, dex, dey, eor, inc, inx, iny, jmp, lda, ldx, ldy, nop, ora, sbc, sta, stx, sty,
     tax, tay, tsx, txa, txs, tya,
 };
 use crate::cpu::cpu::Cpu;
@@ -124,4 +124,21 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0x6C] = jmp::jmp_0x6c;
     // NOP
     cpu_instructions[0xEA] = nop::nop_0xea;
+    // CMP
+    cpu_instructions[0xC9] = cmp::cmp_0xc9;
+    cpu_instructions[0xC5] = cmp::cmp_0xc5;
+    cpu_instructions[0xD5] = cmp::cmp_0xd5;
+    cpu_instructions[0xCD] = cmp::cmp_0xcd;
+    cpu_instructions[0xDD] = cmp::cmp_0xdd;
+    cpu_instructions[0xD9] = cmp::cmp_0xd9;
+    cpu_instructions[0xC1] = cmp::cmp_0xc1;
+    cpu_instructions[0xD1] = cmp::cmp_0xd1;
+    // CPX
+    cpu_instructions[0xE0] = cpx::cpx_0xe0;
+    cpu_instructions[0xE4] = cpx::cpx_0xe4;
+    cpu_instructions[0xEC] = cpx::cpx_0xec;
+    // CPY
+    cpu_instructions[0xC0] = cpy::cpy_0xc0;
+    cpu_instructions[0xC4] = cpy::cpy_0xc4;
+    cpu_instructions[0xCC] = cpy::cpy_0xcc;
 }

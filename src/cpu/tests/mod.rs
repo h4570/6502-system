@@ -1,5 +1,8 @@
 pub mod adc_tests;
 pub mod and_tests;
+pub mod cmp_tests;
+pub mod cpx_tests;
+pub mod cpy_tests;
 pub mod dec_tests;
 pub mod dex_tests;
 pub mod dey_tests;
