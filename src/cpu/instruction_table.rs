@@ -1,4 +1,4 @@
-use super::instructions::{brk, lda, ldx, ldy, sta, stx, sty};
+use super::instructions::{brk, lda, ldx, ldy, sta, stx, sty, tax, tay, tsx, txa, txs, tya};
 use crate::cpu::cpu::Cpu;
 
 pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> u8; 256]) {
@@ -39,6 +39,18 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0x84] = sty::sty_0x84;
     cpu_instructions[0x94] = sty::sty_0x94;
     cpu_instructions[0x8C] = sty::sty_0x8c;
+    // TAX
+    cpu_instructions[0xAA] = tax::tax_0xaa;
+    // TAY
+    cpu_instructions[0xA8] = tay::tay_0xa8;
+    // TSX
+    cpu_instructions[0xBA] = tsx::tsx_0xba;
+    // TXA
+    cpu_instructions[0x8A] = txa::txa_0x8a;
+    // TXS
+    cpu_instructions[0x9A] = txs::txs_0x9a;
+    // TYA
+    cpu_instructions[0x98] = tya::tya_0x98;
     // BRK
     cpu_instructions[0x00] = brk::brk_0x00;
 }

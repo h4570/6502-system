@@ -32,13 +32,6 @@
 
 // ==== TODO:
 // == CPU - Obsługa instrukcji
-// TAX - transfer accumulator to X
-// TAY - transfer accumulator to Y
-// TSX - transfer stack pointer to X
-// TXA - transfer X to accumulator
-// TXS - transfer X to stack pointer
-// TYA - transfer Y to accumulator
-
 // ADC - add with carry
 // SBC - subtract with carry
 // AND - and (with accumulator)

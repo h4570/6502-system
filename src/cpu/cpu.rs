@@ -17,6 +17,7 @@ impl Cpu {
                 x: 0,
                 y: 0,
                 pc: 0,
+                sp: 0,
             },
             flags: Flags { z: 0, n: 0 },
             memory: ram,
