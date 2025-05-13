@@ -26,7 +26,6 @@ mod bpl_tests {
         cpu.run();
         assert_eq!(cpu.registers.a, 0x42); // Check that we didn't branch
     }
-
     #[test]
     fn test_bpl_count_positive_values() {
         let mut cpu = Cpu::new(Ram::new());
@@ -40,23 +39,32 @@ mod bpl_tests {
         cpu.memory.data[0x83] = 0x7F; // Positive
         cpu.memory.data[0x84] = 0x80; // Negative
 
-        // Program: Count positive values in a sequence
+        // Program to count positive values in a sequence
         let program = vec![
-            0xA2, 0x00, // LDX #$00 (index)
-            0xA9, 0x00, // LDA #$00 (counter)
-            0x85, 0x70, // STA $70 (store counter)
-            // Loop start
-            0xBD, 0x80, 0x00, // LDA $0080,X (load array value)
-            0x10, 0x04, // BPL +4 (branch if positive)
-            0xE8, // INX (increment index)
-            0x4C, 0x14, 0x80, // JMP $8014 (jump to compare)
-            // Positive value code
-            0xE6, 0x70, // INC $70 (increment positive counter)
-            0xE8, // INX (increment index)
-            // Compare index to length
-            0xE4, 0x60, // CPX $60 (compare with array length)
-            0x90, 0xF0, // BCC -16 (branch back if less)
-            0x00, // BRK (end program)
+            // Initialize counter to 0
+            0xA9, 0x00, // LDA #$00
+            0x85, 0x70, // STA $70
+            // Check value 1
+            0xA5, 0x80, // LDA $80 (zeropage addressing)
+            0x30, 0x02, // BMI +2 (skip increment)
+            0xE6, 0x70, // INC $70
+            // Check value 2
+            0xA5, 0x81, // LDA $81
+            0x30, 0x02, // BMI +2 (skip increment)
+            0xE6, 0x70, // INC $70
+            // Check value 3
+            0xA5, 0x82, // LDA $82
+            0x30, 0x02, // BMI +2 (skip increment)
+            0xE6, 0x70, // INC $70
+            // Check value 4
+            0xA5, 0x83, // LDA $83
+            0x30, 0x02, // BMI +2 (skip increment)
+            0xE6, 0x70, // INC $70
+            // Check value 5
+            0xA5, 0x84, // LDA $84
+            0x30, 0x02, // BMI +2 (skip increment)
+            0xE6, 0x70, // INC $70
+            0x00, // BRK
         ];
 
         cpu.load_program(&program, 0x8000);

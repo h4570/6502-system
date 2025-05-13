@@ -12,7 +12,7 @@ fn set_val(cpu: &mut Cpu, val: u8) {
     cpu.registers.a = val;
 
     cpu.flags.z = if val == 0 { 1 } else { 0 };
-    cpu.flags.n = if (val & 128) != 0 { 1 } else { 0 };
+    cpu.flags.n = if (val & 0x80) != 0 { 1 } else { 0 };
 }
 
 pub(crate) fn lda_0xa9(cpu: &mut Cpu) -> u8 {
