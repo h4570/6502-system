@@ -75,7 +75,7 @@ impl Cpu {
             let opcode = self.fetch_byte();
 
             if opcode as usize > self.instructions.len() {
-                panic!("Out of bounds opcode! {:#04x}", opcode);
+                panic!("Opcode is out of bounds! {:#04x}", opcode);
             }
 
             let instruction = self.instructions[opcode as usize];

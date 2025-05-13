@@ -32,12 +32,11 @@
 
 // ==== TODO:
 // == CPU - Obsługa instrukcji
-// BEQ - branch on equal (zero set)
-// BNE - branch on not equal (zero clear)
-// BCC - branch on carry clear
 // BCS - branch on carry set
 // BMI - branch on minus (negative set)
 // BPL - branch on plus (negative clear)
+// BVC - branch on overflow clear
+// BVS - branch on overflow set
 
 // PHA - push accumulator
 // PLA - pull accumulator
@@ -45,13 +44,6 @@
 // RTS - return from subroutine
 // ASL - arithmetic shift left
 // BIT - bit test
-
-// BVC - branch on overflow clear
-// BVS - branch on overflow set
-// CLC - clear carry
-// CLD - clear decimal
-// CLI - clear interrupt disable
-// CLV - clear overflow
 
 // LSR - logical shift right
 // PHP - push processor status (SR)

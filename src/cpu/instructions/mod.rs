@@ -1,7 +1,15 @@
 pub mod adc;
 pub mod addr_utils;
 pub mod and;
+pub mod bcc;
+pub mod beq;
+pub mod bne;
+pub mod branch_utils;
 pub mod brk;
+pub mod clc;
+pub mod cld;
+pub mod cli;
+pub mod clv;
 pub mod cmp;
 pub mod cpx;
 pub mod cpy;

@@ -1,5 +1,12 @@
 pub mod adc_tests;
 pub mod and_tests;
+pub mod bcc_tests;
+pub mod beq_tests;
+pub mod bne_tests;
+pub mod clc_tests;
+pub mod cld_tests;
+pub mod cli_tests;
+pub mod clv_tests;
 pub mod cmp_tests;
 pub mod cpx_tests;
 pub mod cpy_tests;

@@ -1,5 +1,5 @@
 use super::instructions::{
-    adc, and, brk, cmp, cpx, cpy, dec, dex, dey, eor, inc, inx, iny, jmp, lda, ldx, ldy, nop, ora, sbc, sta, stx, sty,
+    adc, and, bcc, beq, bne, brk, clc, cld, cli, clv, cmp, cpx, cpy, dec, dex, dey, eor, inc, inx, iny, jmp, lda, ldx, ldy, nop, ora, sbc, sta, stx, sty,
     tax, tay, tsx, txa, txs, tya,
 };
 use crate::cpu::cpu::Cpu;
@@ -141,4 +141,14 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0xC0] = cpy::cpy_0xc0;
     cpu_instructions[0xC4] = cpy::cpy_0xc4;
     cpu_instructions[0xCC] = cpy::cpy_0xcc;
+    // Branch instructions
+    cpu_instructions[0xF0] = beq::beq_0xf0; // BEQ
+    cpu_instructions[0xD0] = bne::bne_0xd0; // BNE
+    cpu_instructions[0x90] = bcc::bcc_0x90; // BCC
+    
+    // Clear flag instructions
+    cpu_instructions[0x18] = clc::clc_0x18; // CLC
+    cpu_instructions[0xD8] = cld::cld_0xd8; // CLD
+    cpu_instructions[0x58] = cli::cli_0x58; // CLI
+    cpu_instructions[0xB8] = clv::clv_0xb8; // CLV
 }
