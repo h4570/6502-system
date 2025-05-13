@@ -1,6 +1,7 @@
 use super::instructions::{
-    adc, and, bcc, beq, bne, brk, clc, cld, cli, clv, cmp, cpx, cpy, dec, dex, dey, eor, inc, inx, iny, jmp, lda, ldx, ldy, nop, ora, sbc, sta, stx, sty,
-    tax, tay, tsx, txa, txs, tya,
+    adc, and, bcc, bcs, beq, bmi, bne, bpl, brk, bvc, bvs, clc, cld, cli, clv, cmp, cpx, cpy, dec,
+    dex, dey, eor, inc, inx, iny, jmp, lda, ldx, ldy, nop, ora, sbc, sta, stx, sty, tax, tay, tsx,
+    txa, txs, tya,
 };
 use crate::cpu::cpu::Cpu;
 
@@ -145,7 +146,12 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0xF0] = beq::beq_0xf0; // BEQ
     cpu_instructions[0xD0] = bne::bne_0xd0; // BNE
     cpu_instructions[0x90] = bcc::bcc_0x90; // BCC
-    
+    cpu_instructions[0xB0] = bcs::bcs_0xb0; // BCS
+    cpu_instructions[0x10] = bpl::bpl_0x10; // BPL
+    cpu_instructions[0x30] = bmi::bmi_0x30; // BMI
+    cpu_instructions[0x50] = bvc::bvc_0x50; // BVC
+    cpu_instructions[0x70] = bvs::bvs_0x70; // BVS
+
     // Clear flag instructions
     cpu_instructions[0x18] = clc::clc_0x18; // CLC
     cpu_instructions[0xD8] = cld::cld_0xd8; // CLD
