@@ -33,19 +33,19 @@ mod bvs_tests {
 
         // Program: Detect and handle overflow cases in a series of additions
         let program = vec![
-            0xA9, 0x7F,       // LDA #$7F (127)
+            0xA9, 0x7F, // LDA #$7F (127)
             0x8D, 0x80, 0x00, // STA $0080 (store 127 to check later)
-            0xA9, 0x01,       // LDA #$01 (1)
-            0x18,             // CLC
+            0xA9, 0x01, // LDA #$01 (1)
+            0x18, // CLC
             0x6D, 0x80, 0x00, // ADC $0080 (add 127, will cause overflow)
-            0x70, 0x05,       // BVS +5 (branch if overflow set)
-            0xA9, 0xFF,       // LDA #$FF (shouldn't execute)
+            0x70, 0x06, // BVS +6 (branch if overflow set) - Fixed: was +7
+            0xA9, 0xFF, // LDA #$FF (shouldn't execute)
             0x8D, 0x81, 0x00, // STA $0081 (shouldn't execute)
-            0x00,             // BRK (shouldn't execute)
+            0x00, // BRK (shouldn't execute)
             // Overflow handler
-            0xA9, 0x42,       // LDA #$42 (flag for overflow detected)
+            0xA9, 0x42, // LDA #$42 (66 - flag for overflow detected)
             0x8D, 0x81, 0x00, // STA $0081
-            0x00,             // BRK
+            0x00, // BRK
         ];
 
         cpu.load_program(&program, 0x8000);
