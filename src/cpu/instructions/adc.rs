@@ -1,3 +1,4 @@
+use crate::trace_instruction;
 use log::trace;
 
 use crate::cpu::{
@@ -39,7 +40,7 @@ pub(crate) fn adc_0x69(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ADC[0x69] Immediate");
+    trace_instruction!(cpu, ADC, "0x69 Immediate");
     2
 }
 

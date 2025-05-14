@@ -31,9 +31,6 @@
 //    - Rejestr kontrolny (start/stop, kierunek transferu, flagi statusu)
 
 // ==== TODO:
-// == CPU - Obsługa instrukcji
-// RTI - return from interrupt
-
 // == CPU - Obsługa cykli
 // == CPU - Dodanie "-i / --input mem.bin", który wciągnie konkretny plik
 // == CPU - Dodanie "-dm / --dump-mem mem.bin", który zrzuci pamięć po zakończeniu programu

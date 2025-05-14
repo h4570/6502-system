@@ -26,6 +26,7 @@ impl Cpu {
                 i: 0,
                 d: 0,
                 v: 0,
+                b: 0,
             },
             memory: ram,
             instructions: [Cpu::unknown_opcode; 256],
@@ -48,6 +49,18 @@ impl Cpu {
         let val = self.memory.data[self.registers.pc as usize];
         self.registers.pc += 1;
         return val;
+    }
+
+    /// Returns processor status byte combining all flags
+    pub fn get_processor_status(&self) -> u8 {
+        (self.flags.n << 7)     // Negative flag (bit 7)
+            | (self.flags.v << 6)    // Overflow flag (bit 6)
+            | (1 << 5)               // Unused bit, always set to 1 (bit 5)
+            | (self.flags.b << 4)    // Break flag (bit 4)
+            | (self.flags.d << 3)    // Decimal mode flag (bit 3)
+            | (self.flags.i << 2)    // Interrupt disable flag (bit 2)
+            | (self.flags.z << 1)    // Zero flag (bit 1)
+            | self.flags.c // Carry flag (bit 0)
     }
 
     pub fn reset(&mut self) {

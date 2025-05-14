@@ -52,6 +52,7 @@ pub mod stx;
 pub mod sty;
 pub mod tax;
 pub mod tay;
+pub mod trace_utils;
 pub mod tsx;
 pub mod txa;
 pub mod txs;
