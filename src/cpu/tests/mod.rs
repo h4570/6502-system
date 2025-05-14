@@ -1,8 +1,10 @@
 pub mod adc_tests;
 pub mod and_tests;
+pub mod asl_tests;
 pub mod bcc_tests;
 pub mod bcs_tests;
 pub mod beq_tests;
+pub mod bit_tests;
 pub mod bmi_tests;
 pub mod bne_tests;
 pub mod bpl_tests;
@@ -27,6 +29,7 @@ pub mod jsr_tests;
 pub mod lda_tests;
 pub mod ldx_tests;
 pub mod ldy_tests;
+pub mod lsr_tests;
 pub mod nop_tests;
 pub mod ora_tests;
 pub mod pha_tests;

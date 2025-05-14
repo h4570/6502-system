@@ -1,7 +1,7 @@
 use super::instructions::{
-    adc, and, bcc, bcs, beq, bmi, bne, bpl, brk, bvc, bvs, clc, cld, cli, clv, cmp, cpx, cpy, dec,
-    dex, dey, eor, inc, inx, iny, jmp, jsr, lda, ldx, ldy, nop, ora, pha, pla, rts, sbc, sta, stx, sty, tax, tay, tsx,
-    txa, txs, tya,
+    adc, and, asl, bcc, bcs, beq, bit, bmi, bne, bpl, brk, bvc, bvs, clc, cld, cli, clv, cmp, cpx,
+    cpy, dec, dex, dey, eor, inc, inx, iny, jmp, jsr, lda, ldx, ldy, lsr, nop, ora, pha, pla, rts,
+    sbc, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
 };
 use crate::cpu::cpu::Cpu;
 
@@ -15,6 +15,21 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0xB9] = lda::lda_0xb9;
     cpu_instructions[0xA1] = lda::lda_0xa1;
     cpu_instructions[0xB1] = lda::lda_0xb1;
+    // BIT
+    cpu_instructions[0x24] = bit::bit_0x24;
+    cpu_instructions[0x2c] = bit::bit_0x2c;
+    // ASL
+    cpu_instructions[0x0A] = asl::asl_0x0a;
+    cpu_instructions[0x06] = asl::asl_0x06;
+    cpu_instructions[0x16] = asl::asl_0x16;
+    cpu_instructions[0x0E] = asl::asl_0x0e;
+    cpu_instructions[0x1E] = asl::asl_0x1e;
+    // LSR
+    cpu_instructions[0x4A] = lsr::lsr_0x4a;
+    cpu_instructions[0x46] = lsr::lsr_0x46;
+    cpu_instructions[0x56] = lsr::lsr_0x56;
+    cpu_instructions[0x4E] = lsr::lsr_0x4e;
+    cpu_instructions[0x5E] = lsr::lsr_0x5e;
     // LDX
     cpu_instructions[0xA2] = ldx::ldx_0xa2;
     cpu_instructions[0xA6] = ldx::ldx_0xa6;
@@ -119,11 +134,11 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     // DEX
     cpu_instructions[0xCA] = dex::dex_0xca;
     // DEY
-    cpu_instructions[0x88] = dey::dey_0x88;    // JMP
+    cpu_instructions[0x88] = dey::dey_0x88;
     cpu_instructions[0x4C] = jmp::jmp_0x4c;
     cpu_instructions[0x6C] = jmp::jmp_0x6c;
     // JSR
-    cpu_instructions[0x20] = jsr::jsr_0x20;    // PHA
+    cpu_instructions[0x20] = jsr::jsr_0x20;
     cpu_instructions[0x48] = pha::pha_0x48;
     // PLA
     cpu_instructions[0x68] = pla::pla_0x68;
