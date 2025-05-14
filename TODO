@@ -1,3 +1,17 @@
+// ==== TODO:
+// == CPU - Dodanie "-i / --input mem.bin", który wciągnie konkretny plik
+// == CPU - Dodanie "-dm / --dump-mem mem.bin", który zrzuci pamięć po zakończeniu programu
+// == CPU - Napisanie prostego programu w C za pomocą kompilatora cc65
+
+// == GPU - Napisanie bazy (pamięć, rejestry)
+// == GPU - Utworzenie okienka
+// == GPU - VSYNC / HSYNC
+// == GPU - Wyświetlanie co 0,5s jednego z buforów na zmianę
+
+// == DMA
+
+// ----------------------------------------
+
 // ==== Specyfikacja
 // == RAM - 64KB
 // == Magistrala danych
@@ -29,16 +43,3 @@
 //    - Rejestr adresu docelowego (gdzie dane będą zapisywane w VRAM)
 //    - Rejestr długości transferu (ile bajtów ma zostać przeniesionych)
 //    - Rejestr kontrolny (start/stop, kierunek transferu, flagi statusu)
-
-// ==== TODO:
-// == CPU - Obsługa cykli
-// == CPU - Dodanie "-i / --input mem.bin", który wciągnie konkretny plik
-// == CPU - Dodanie "-dm / --dump-mem mem.bin", który zrzuci pamięć po zakończeniu programu
-// == CPU - Napisanie prostego programu w C za pomocą kompilatora cc65
-
-// == GPU - Napisanie bazy (pamięć, rejestry)
-// == GPU - Utworzenie okienka
-// == GPU - VSYNC / HSYNC
-// == GPU - Wyświetlanie co 0,5s jednego z buforów na zmianę
-
-// == DMA
