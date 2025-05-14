@@ -3,9 +3,9 @@
 This project is an emulator for a hypothetical computer system based on the classic 6502 CPU with custom GPU and DMA controller.
 
 ## TODO list
-- :heavy_check_mark: CPU 
-- :white_check_mark: GPU 
-- :white_check_mark: DMA 
+- [X] CPU 
+- [ ] GPU 
+- [ ] DMA 
 
 ## System Specifications
 
