@@ -32,20 +32,10 @@
 
 // ==== TODO:
 // == CPU - Obsługa instrukcji
-// BCS - branch on carry set
-// BMI - branch on minus (negative set)
-// BPL - branch on plus (negative clear)
-// BVC - branch on overflow clear
-// BVS - branch on overflow set
-
-// PHA - push accumulator
-// PLA - pull accumulator
-// JSR - jump subroutine
-// RTS - return from subroutine
 // ASL - arithmetic shift left
 // BIT - bit test
-
 // LSR - logical shift right
+
 // PHP - push processor status (SR)
 // PLP - pull processor status (SR)
 // ROL - rotate left

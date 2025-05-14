@@ -1,6 +1,6 @@
 use super::instructions::{
     adc, and, bcc, bcs, beq, bmi, bne, bpl, brk, bvc, bvs, clc, cld, cli, clv, cmp, cpx, cpy, dec,
-    dex, dey, eor, inc, inx, iny, jmp, lda, ldx, ldy, nop, ora, sbc, sta, stx, sty, tax, tay, tsx,
+    dex, dey, eor, inc, inx, iny, jmp, jsr, lda, ldx, ldy, nop, ora, pha, pla, rts, sbc, sta, stx, sty, tax, tay, tsx,
     txa, txs, tya,
 };
 use crate::cpu::cpu::Cpu;
@@ -119,10 +119,16 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     // DEX
     cpu_instructions[0xCA] = dex::dex_0xca;
     // DEY
-    cpu_instructions[0x88] = dey::dey_0x88;
-    // JMP
+    cpu_instructions[0x88] = dey::dey_0x88;    // JMP
     cpu_instructions[0x4C] = jmp::jmp_0x4c;
     cpu_instructions[0x6C] = jmp::jmp_0x6c;
+    // JSR
+    cpu_instructions[0x20] = jsr::jsr_0x20;    // PHA
+    cpu_instructions[0x48] = pha::pha_0x48;
+    // PLA
+    cpu_instructions[0x68] = pla::pla_0x68;
+    // RTS
+    cpu_instructions[0x60] = rts::rts_0x60;
     // NOP
     cpu_instructions[0xEA] = nop::nop_0xea;
     // CMP
