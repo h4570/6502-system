@@ -1,6 +1,5 @@
-use log::trace;
-
 use crate::cpu::cpu::Cpu;
+use crate::trace_instruction;
 
 pub(crate) fn rts_0x60(cpu: &mut Cpu) -> u8 {
     // Pull return address from stack
@@ -17,6 +16,6 @@ pub(crate) fn rts_0x60(cpu: &mut Cpu) -> u8 {
     // So we need to add 1 to get back to the proper return point
     cpu.registers.pc = return_addr + 1;
 
-    trace!("RTS[0x60] Returning to {:04X}", cpu.registers.pc);
+    trace_instruction!(cpu, "RTS", "0x60", "Implied");
     6
 }

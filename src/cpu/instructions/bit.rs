@@ -4,6 +4,7 @@ use crate::cpu::{
     cpu::Cpu,
     instructions::addr_utils::{addr_absolute, addr_zeropage},
 };
+use crate::trace_instruction;
 
 pub(crate) fn bit_0x24(cpu: &mut Cpu) -> u8 {
     let addr = addr_zeropage(cpu);
@@ -17,7 +18,7 @@ pub(crate) fn bit_0x24(cpu: &mut Cpu) -> u8 {
     cpu.flags.n = (val >> 7) & 1;
     cpu.flags.v = (val >> 6) & 1;
 
-    trace!("BIT[0x24] Zeropage");
+    trace_instruction!(cpu, "BIT", "0x24", "Zeropage");
     3
 }
 
@@ -33,6 +34,6 @@ pub(crate) fn bit_0x2c(cpu: &mut Cpu) -> u8 {
     cpu.flags.n = (val >> 7) & 1;
     cpu.flags.v = (val >> 6) & 1;
 
-    trace!("BIT[0x2C] Absolute");
+    trace_instruction!(cpu, "BIT", "0x2C", "Absolute");
     4
 }

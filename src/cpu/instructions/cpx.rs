@@ -1,9 +1,8 @@
-use log::trace;
-
 use crate::cpu::{
     cpu::Cpu,
     instructions::addr_utils::{addr_absolute, addr_immediate, addr_zeropage},
 };
+use crate::trace_instruction;
 
 fn set_flags(cpu: &mut Cpu, operand: u8) {
     let x = cpu.registers.x;
@@ -23,7 +22,7 @@ pub(crate) fn cpx_0xe0(cpu: &mut Cpu) -> u8 {
     let operand = addr_immediate(cpu);
     set_flags(cpu, operand);
 
-    trace!("CPX[0xE0] Immediate");
+    trace_instruction!(cpu, "CPX", "0xE0", "Immediate");
     2
 }
 
@@ -32,7 +31,7 @@ pub(crate) fn cpx_0xe4(cpu: &mut Cpu) -> u8 {
     let operand = cpu.memory.data[addr as usize];
     set_flags(cpu, operand);
 
-    trace!("CPX[0xE4] Zeropage");
+    trace_instruction!(cpu, "CPX", "0xE4", "Zeropage");
     3
 }
 
@@ -41,6 +40,6 @@ pub(crate) fn cpx_0xec(cpu: &mut Cpu) -> u8 {
     let operand = cpu.memory.data[addr as usize];
     set_flags(cpu, operand);
 
-    trace!("CPX[0xEC] Absolute");
+    trace_instruction!(cpu, "CPX", "0xEC", "Absolute");
     4
 }

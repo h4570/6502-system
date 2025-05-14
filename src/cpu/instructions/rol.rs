@@ -1,9 +1,8 @@
-use log::trace;
-
 use crate::cpu::{
     cpu::Cpu,
     instructions::addr_utils::{addr_absolute, addr_absolute_x, addr_zeropage, addr_zeropage_x},
 };
+use crate::trace_instruction;
 
 fn rol(cpu: &mut Cpu, val: u8) -> u8 {
     let old_carry = cpu.flags.c;
@@ -24,7 +23,7 @@ pub(crate) fn rol_0x2a(cpu: &mut Cpu) -> u8 {
     let val = cpu.registers.a;
     cpu.registers.a = rol(cpu, val);
 
-    trace!("ROL[0x2A] Accumulator");
+    trace_instruction!(cpu, "ROL", "0x2A", "Accumulator");
     2
 }
 
@@ -35,7 +34,7 @@ pub(crate) fn rol_0x26(cpu: &mut Cpu) -> u8 {
     let result = rol(cpu, val);
     cpu.memory.data[addr as usize] = result;
 
-    trace!("ROL[0x26] Zero Page");
+    trace_instruction!(cpu, "ROL", "0x26", "Zero Page");
     5
 }
 
@@ -46,7 +45,7 @@ pub(crate) fn rol_0x36(cpu: &mut Cpu) -> u8 {
     let result = rol(cpu, val);
     cpu.memory.data[addr as usize] = result;
 
-    trace!("ROL[0x36] Zero Page,X");
+    trace_instruction!(cpu, "ROL", "0x36", "Zero Page,X");
     6
 }
 
@@ -57,7 +56,7 @@ pub(crate) fn rol_0x2e(cpu: &mut Cpu) -> u8 {
     let result = rol(cpu, val);
     cpu.memory.data[addr as usize] = result;
 
-    trace!("ROL[0x2E] Absolute");
+    trace_instruction!(cpu, "ROL", "0x2E", "Absolute");
     6
 }
 
@@ -68,6 +67,6 @@ pub(crate) fn rol_0x3e(cpu: &mut Cpu) -> u8 {
     let result = rol(cpu, val);
     cpu.memory.data[addr as usize] = result;
 
-    trace!("ROL[0x3E] Absolute,X");
+    trace_instruction!(cpu, "ROL", "0x3E", "Absolute,X");
     7
 }

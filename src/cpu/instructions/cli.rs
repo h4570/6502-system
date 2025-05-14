@@ -1,8 +1,8 @@
 use crate::cpu::cpu::Cpu;
-use log::trace;
+use crate::trace_instruction;
 
 pub(crate) fn cli_0x58(cpu: &mut Cpu) -> u8 {
     cpu.flags.i = 0;
-    trace!("CLC - Clear interrupt flag");
+    trace_instruction!(cpu, "CLI", "0x58", "Implied");
     2
 }

@@ -1,8 +1,8 @@
 use crate::cpu::cpu::Cpu;
-use log::trace;
+use crate::trace_instruction;
 
 pub(crate) fn cld_0xd8(cpu: &mut Cpu) -> u8 {
     cpu.flags.d = 0;
-    trace!("CLC - Clear decimal flag");
+    trace_instruction!(cpu, "CLD", "0xD8", "Implied");
     2
 }

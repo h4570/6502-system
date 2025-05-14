@@ -1,5 +1,3 @@
-use log::trace;
-
 use crate::cpu::{
     cpu::Cpu,
     instructions::addr_utils::{
@@ -7,6 +5,7 @@ use crate::cpu::{
         addr_indirect_y, addr_zeropage, addr_zeropage_x,
     },
 };
+use crate::trace_instruction;
 
 fn set_val(cpu: &mut Cpu, operand: u8) {
     cpu.registers.a = cpu.registers.a | operand;
@@ -20,7 +19,7 @@ pub(crate) fn ora_0x09(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ORA[0x09] Immediate");
+    trace_instruction!(cpu, "ORA", "0x09", "Immediate");
     2
 }
 
@@ -30,7 +29,7 @@ pub(crate) fn ora_0x05(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ORA[0x05] Zeropage");
+    trace_instruction!(cpu, "ORA", "0x05", "Zeropage");
     3
 }
 
@@ -40,7 +39,7 @@ pub(crate) fn ora_0x15(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ORA[0x15] Zeropage,X");
+    trace_instruction!(cpu, "ORA", "0x15", "Zeropage,X");
     4
 }
 
@@ -50,7 +49,7 @@ pub(crate) fn ora_0x0d(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ORA[0x0D] Absolute");
+    trace_instruction!(cpu, "ORA", "0x0D", "Absolute");
     4
 }
 
@@ -60,7 +59,7 @@ pub(crate) fn ora_0x1d(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ORA[0x1D] Absolute,X");
+    trace_instruction!(cpu, "ORA", "0x1D", "Absolute,X");
     if page_crossed { 5 } else { 4 }
 }
 
@@ -70,7 +69,7 @@ pub(crate) fn ora_0x19(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ORA[0x19] Absolute,Y");
+    trace_instruction!(cpu, "ORA", "0x19", "Absolute,Y");
     if page_crossed { 5 } else { 4 }
 }
 
@@ -80,7 +79,7 @@ pub(crate) fn ora_0x01(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ORA[0x01] (Indirect,X)");
+    trace_instruction!(cpu, "ORA", "0x01", "(Indirect,X)");
     6
 }
 
@@ -90,6 +89,6 @@ pub(crate) fn ora_0x11(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ORA[0x11] (Indirect),Y");
+    trace_instruction!(cpu, "ORA", "0x11", "(Indirect),Y");
     if page_crossed { 6 } else { 5 }
 }

@@ -1,5 +1,5 @@
 use crate::cpu::cpu::Cpu;
-use log::trace;
+use crate::trace_instruction;
 
 pub(crate) fn jmp_0x4c(cpu: &mut Cpu) -> u8 {
     // Absolute addressing mode - 3 bytes (opcode + low byte + high byte)
@@ -9,7 +9,7 @@ pub(crate) fn jmp_0x4c(cpu: &mut Cpu) -> u8 {
     let addr = (hi << 8) | lo;
     cpu.registers.pc = addr;
 
-    trace!("JMP[0x4C] Absolute ${:04X}", addr);
+    trace_instruction!(cpu, "JMP", "0x4C", "Absolute");
     3
 }
 
@@ -33,6 +33,6 @@ pub(crate) fn jmp_0x6c(cpu: &mut Cpu) -> u8 {
     let addr = (addr_hi << 8) | addr_lo;
     cpu.registers.pc = addr;
 
-    trace!("JMP[0x6C] Indirect (${:04X}) -> ${:04X}", pointer, addr);
+    trace_instruction!(cpu, "JMP", "0x6C", "Indirect");
     5
 }

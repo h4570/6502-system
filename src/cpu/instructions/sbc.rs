@@ -1,5 +1,3 @@
-use log::trace;
-
 use crate::cpu::{
     cpu::Cpu,
     instructions::addr_utils::{
@@ -7,6 +5,7 @@ use crate::cpu::{
         addr_indirect_y, addr_zeropage, addr_zeropage_x,
     },
 };
+use crate::trace_instruction;
 
 fn set_val(cpu: &mut Cpu, operand: u8) {
     let a = cpu.registers.a;
@@ -41,7 +40,7 @@ pub(crate) fn sbc_0xe9(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("SBC[0xE9] Immediate");
+    trace_instruction!(cpu, "SBC", "0xE9", "Immediate");
     2
 }
 
@@ -51,7 +50,7 @@ pub(crate) fn sbc_0xe5(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("SBC[0xE5] Zeropage");
+    trace_instruction!(cpu, "SBC", "0xE5", "Zeropage");
     3
 }
 
@@ -61,7 +60,7 @@ pub(crate) fn sbc_0xf5(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("SBC[0xF5] Zeropage,X");
+    trace_instruction!(cpu, "SBC", "0xF5", "Zeropage,X");
     4
 }
 
@@ -71,7 +70,7 @@ pub(crate) fn sbc_0xed(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("SBC[0xED] Absolute");
+    trace_instruction!(cpu, "SBC", "0xED", "Absolute");
     4
 }
 
@@ -81,7 +80,7 @@ pub(crate) fn sbc_0xfd(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("SBC[0xFD] Absolute,X");
+    trace_instruction!(cpu, "SBC", "0xFD", "Absolute,X");
     if page_crossed { 5 } else { 4 }
 }
 
@@ -91,7 +90,7 @@ pub(crate) fn sbc_0xf9(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("SBC[0xF9] Absolute,Y");
+    trace_instruction!(cpu, "SBC", "0xF9", "Absolute,Y");
     if page_crossed { 5 } else { 4 }
 }
 
@@ -101,7 +100,7 @@ pub(crate) fn sbc_0xe1(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("SBC[0xE1] (Indirect,X)");
+    trace_instruction!(cpu, "SBC", "0xE1", "Indirect,X");
     6
 }
 
@@ -111,6 +110,6 @@ pub(crate) fn sbc_0xf1(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("SBC[0xF1] (Indirect),Y");
+    trace_instruction!(cpu, "SBC", "0xF1", "Indirect,Y");
     if page_crossed { 6 } else { 5 }
 }

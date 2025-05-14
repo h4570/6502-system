@@ -1,9 +1,8 @@
-use log::trace;
-
 use crate::cpu::{
     cpu::Cpu,
     instructions::addr_utils::{addr_absolute, addr_absolute_x, addr_zeropage, addr_zeropage_x},
 };
+use crate::trace_instruction;
 
 fn ror(cpu: &mut Cpu, val: u8) -> u8 {
     let old_carry = cpu.flags.c;
@@ -24,7 +23,7 @@ pub(crate) fn ror_0x6a(cpu: &mut Cpu) -> u8 {
     let val = cpu.registers.a;
     cpu.registers.a = ror(cpu, val);
 
-    trace!("ROR[0x6A] Accumulator");
+    trace_instruction!(cpu, "ROR", "0x6A", "Accumulator");
     2
 }
 
@@ -35,7 +34,7 @@ pub(crate) fn ror_0x66(cpu: &mut Cpu) -> u8 {
     let result = ror(cpu, val);
     cpu.memory.data[addr as usize] = result;
 
-    trace!("ROR[0x66] Zero Page");
+    trace_instruction!(cpu, "ROR", "0x66", "Zero Page");
     5
 }
 
@@ -46,7 +45,7 @@ pub(crate) fn ror_0x76(cpu: &mut Cpu) -> u8 {
     let result = ror(cpu, val);
     cpu.memory.data[addr as usize] = result;
 
-    trace!("ROR[0x76] Zero Page,X");
+    trace_instruction!(cpu, "ROR", "0x76", "Zero Page,X");
     6
 }
 
@@ -57,7 +56,7 @@ pub(crate) fn ror_0x6e(cpu: &mut Cpu) -> u8 {
     let result = ror(cpu, val);
     cpu.memory.data[addr as usize] = result;
 
-    trace!("ROR[0x6E] Absolute");
+    trace_instruction!(cpu, "ROR", "0x6E", "Absolute");
     6
 }
 
@@ -68,6 +67,6 @@ pub(crate) fn ror_0x7e(cpu: &mut Cpu) -> u8 {
     let result = ror(cpu, val);
     cpu.memory.data[addr as usize] = result;
 
-    trace!("ROR[0x7E] Absolute,X");
+    trace_instruction!(cpu, "ROR", "0x7E", "Absolute,X");
     7
 }

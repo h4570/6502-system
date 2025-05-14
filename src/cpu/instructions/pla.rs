@@ -1,6 +1,5 @@
-use log::trace;
-
 use crate::cpu::cpu::Cpu;
+use crate::trace_instruction;
 
 pub(crate) fn pla_0x68(cpu: &mut Cpu) -> u8 {
     // Increment stack pointer first, then pull value
@@ -13,6 +12,6 @@ pub(crate) fn pla_0x68(cpu: &mut Cpu) -> u8 {
     cpu.flags.z = if val == 0 { 1 } else { 0 };
     cpu.flags.n = if (val & 0x80) != 0 { 1 } else { 0 };
 
-    trace!("PLA[0x68]");
+    trace_instruction!(cpu, "PLA", "0x68", "Implied");
     4
 }

@@ -1,8 +1,8 @@
 use crate::cpu::cpu::Cpu;
-use log::trace;
+use crate::trace_instruction;
 
 pub(crate) fn php_0x08(cpu: &mut Cpu) -> u8 {
-    trace!("PHP[0x08]");
+    trace_instruction!(cpu, "PHP", "0x08", "Implied");
 
     // Debug the flag values before any calculation
     println!(

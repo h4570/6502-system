@@ -1,11 +1,10 @@
-use log::trace;
-
 use crate::cpu::{
     cpu::Cpu,
     instructions::addr_utils::{
         addr_absolute, addr_absolute_x, addr_immediate, addr_zeropage, addr_zeropage_x,
     },
 };
+use crate::trace_instruction;
 
 fn set_val(cpu: &mut Cpu, val: u8) {
     cpu.registers.y = val;
@@ -18,7 +17,7 @@ pub(crate) fn ldy_0xa0(cpu: &mut Cpu) -> u8 {
     let val = addr_immediate(cpu);
     set_val(cpu, val);
 
-    trace!("LDY[0xA2] Immediate");
+    trace_instruction!(cpu, "LDY", "0xA0", "Immediate");
     2
 }
 
@@ -27,7 +26,7 @@ pub(crate) fn ldy_0xa4(cpu: &mut Cpu) -> u8 {
     let val = cpu.memory.data[addr as usize];
     set_val(cpu, val);
 
-    trace!("LDY[0xA4] Zeropage");
+    trace_instruction!(cpu, "LDY", "0xA4", "Zeropage");
     3
 }
 
@@ -36,7 +35,7 @@ pub(crate) fn ldy_0xb4(cpu: &mut Cpu) -> u8 {
     let val = cpu.memory.data[addr as usize];
     set_val(cpu, val);
 
-    trace!("LDY[0xB4] Zeropage,X");
+    trace_instruction!(cpu, "LDY", "0xB4", "Zeropage,X");
     4
 }
 
@@ -45,7 +44,7 @@ pub(crate) fn ldy_0xac(cpu: &mut Cpu) -> u8 {
     let val = cpu.memory.data[addr as usize];
     set_val(cpu, val);
 
-    trace!("LDY[0xAC] Absolute");
+    trace_instruction!(cpu, "LDY", "0xAC", "Absolute");
     4
 }
 
@@ -54,6 +53,6 @@ pub(crate) fn ldy_0xbc(cpu: &mut Cpu) -> u8 {
     let val = cpu.memory.data[addr as usize];
     set_val(cpu, val);
 
-    trace!("LDY[0xBC] Absolute,X");
+    trace_instruction!(cpu, "LDY", "0xBC", "Absolute,X");
     if page_crossed { 5 } else { 4 }
 }

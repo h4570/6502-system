@@ -1,8 +1,8 @@
 use crate::cpu::cpu::Cpu;
-use log::trace;
+use crate::trace_instruction;
 
 pub(crate) fn clv_0xb8(cpu: &mut Cpu) -> u8 {
     cpu.flags.v = 0;
-    trace!("CLC - Clear overflow flag");
+    trace_instruction!(cpu, "CLV", "0xB8", "Implied");
     2
 }

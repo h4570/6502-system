@@ -1,8 +1,8 @@
 use crate::cpu::cpu::Cpu;
-use log::trace;
+use crate::trace_instruction;
 
 pub(crate) fn plp_0x28(cpu: &mut Cpu) -> u8 {
-    trace!("PLP[0x28]");
+    trace_instruction!(cpu, "PLP", "0x28", "Implied");
 
     // Pull status register from stack
     cpu.registers.sp = cpu.registers.sp.wrapping_add(1);

@@ -1,4 +1,5 @@
 use crate::cpu::cpu::Cpu;
+use crate::trace_instruction;
 
 pub(crate) fn rti_0x40(cpu: &mut Cpu) -> u8 {
     // Debug - Print stack pointer before operation
@@ -79,5 +80,6 @@ pub(crate) fn rti_0x40(cpu: &mut Cpu) -> u8 {
     );
 
     println!("RTI[0x40] Implicit - Complete");
+    trace_instruction!(cpu, "RTI", "0x40", "Implied");
     6
 }

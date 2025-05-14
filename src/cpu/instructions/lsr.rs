@@ -1,9 +1,8 @@
-use log::trace;
-
 use crate::cpu::{
     cpu::Cpu,
     instructions::addr_utils::{addr_absolute, addr_absolute_x, addr_zeropage, addr_zeropage_x},
 };
+use crate::trace_instruction;
 
 pub(crate) fn lsr_0x4a(cpu: &mut Cpu) -> u8 {
     let val = cpu.registers.a;
@@ -21,7 +20,7 @@ pub(crate) fn lsr_0x4a(cpu: &mut Cpu) -> u8 {
     cpu.flags.z = if result == 0 { 1 } else { 0 };
     cpu.flags.n = 0; // Always clear for LSR
 
-    trace!("LSR[0x4A] Accumulator");
+    trace_instruction!(cpu, "LSR", "0x4A", "Accumulator");
     2
 }
 
@@ -42,7 +41,7 @@ pub(crate) fn lsr_0x46(cpu: &mut Cpu) -> u8 {
     cpu.flags.z = if result == 0 { 1 } else { 0 };
     cpu.flags.n = 0; // Always clear for LSR
 
-    trace!("LSR[0x46] Zeropage");
+    trace_instruction!(cpu, "LSR", "0x46", "Zeropage");
     5
 }
 
@@ -63,7 +62,7 @@ pub(crate) fn lsr_0x56(cpu: &mut Cpu) -> u8 {
     cpu.flags.z = if result == 0 { 1 } else { 0 };
     cpu.flags.n = 0; // Always clear for LSR
 
-    trace!("LSR[0x56] Zeropage,X");
+    trace_instruction!(cpu, "LSR", "0x56", "Zeropage,X");
     6
 }
 
@@ -84,7 +83,7 @@ pub(crate) fn lsr_0x4e(cpu: &mut Cpu) -> u8 {
     cpu.flags.z = if result == 0 { 1 } else { 0 };
     cpu.flags.n = 0; // Always clear for LSR
 
-    trace!("LSR[0x4E] Absolute");
+    trace_instruction!(cpu, "LSR", "0x4E", "Absolute");
     6
 }
 
@@ -105,6 +104,6 @@ pub(crate) fn lsr_0x5e(cpu: &mut Cpu) -> u8 {
     cpu.flags.z = if result == 0 { 1 } else { 0 };
     cpu.flags.n = 0; // Always clear for LSR
 
-    trace!("LSR[0x5E] Absolute,X");
+    trace_instruction!(cpu, "LSR", "0x5E", "Absolute,X");
     7
 }
