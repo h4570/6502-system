@@ -1,5 +1,4 @@
 use crate::trace_instruction;
-use log::trace;
 
 use crate::cpu::{
     cpu::Cpu,
@@ -40,7 +39,7 @@ pub(crate) fn adc_0x69(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace_instruction!(cpu, ADC, "0x69 Immediate");
+    trace_instruction!(cpu, "ADC", "0x69", "Immediate");
     2
 }
 
@@ -50,7 +49,7 @@ pub(crate) fn adc_0x65(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ADC[0x65] Zeropage");
+    trace_instruction!(cpu, "ADC", "0x65", "Zeropage");
     3
 }
 
@@ -60,7 +59,7 @@ pub(crate) fn adc_0x75(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ADC[0x75] Zeropage,X");
+    trace_instruction!(cpu, "ADC", "0x75", "Zeropage,X");
     4
 }
 
@@ -70,7 +69,7 @@ pub(crate) fn adc_0x6d(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ADC[0x6D] Absolute");
+    trace_instruction!(cpu, "ADC", "0x6D", "Absolute");
     4
 }
 
@@ -80,7 +79,7 @@ pub(crate) fn adc_0x7d(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ADC[0x7D] Absolute,X");
+    trace_instruction!(cpu, "ADC", "0x7D", "Absolute,X");
     if page_crossed { 5 } else { 4 }
 }
 
@@ -90,7 +89,7 @@ pub(crate) fn adc_0x79(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ADC[0x79] Absolute,Y");
+    trace_instruction!(cpu, "ADC", "0x79", "Absolute,Y");
     if page_crossed { 5 } else { 4 }
 }
 
@@ -100,7 +99,7 @@ pub(crate) fn adc_0x61(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ADC[0x61] (Indirect,X)");
+    trace_instruction!(cpu, "ADC", "0x61", "(Indirect,X)");
     6
 }
 
@@ -110,6 +109,6 @@ pub(crate) fn adc_0x71(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("ADC[0x71] (Indirect),Y");
+    trace_instruction!(cpu, "ADC", "0x71", "(Indirect),Y");
     if page_crossed { 6 } else { 5 }
 }

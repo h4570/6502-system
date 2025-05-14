@@ -1,4 +1,4 @@
-use log::trace;
+use crate::trace_instruction;
 
 use crate::cpu::{
     cpu::Cpu,
@@ -21,7 +21,7 @@ pub(crate) fn asl_0x0a(cpu: &mut Cpu) -> u8 {
     cpu.flags.z = if result == 0 { 1 } else { 0 };
     cpu.flags.n = if (result & 0x80) != 0 { 1 } else { 0 };
 
-    trace!("ASL[0x0A] Accumulator");
+    trace_instruction!(cpu, "ASL", "0x0A", "Accumulator");
     2
 }
 
@@ -42,7 +42,7 @@ pub(crate) fn asl_0x06(cpu: &mut Cpu) -> u8 {
     cpu.flags.z = if result == 0 { 1 } else { 0 };
     cpu.flags.n = if (result & 0x80) != 0 { 1 } else { 0 };
 
-    trace!("ASL[0x06] Zeropage");
+    trace_instruction!(cpu, "ASL", "0x06", "Zeropage");
     5
 }
 
@@ -63,7 +63,7 @@ pub(crate) fn asl_0x16(cpu: &mut Cpu) -> u8 {
     cpu.flags.z = if result == 0 { 1 } else { 0 };
     cpu.flags.n = if (result & 0x80) != 0 { 1 } else { 0 };
 
-    trace!("ASL[0x16] Zeropage,X");
+    trace_instruction!(cpu, "ASL", "0x16", "Zeropage,X");
     6
 }
 
@@ -84,7 +84,7 @@ pub(crate) fn asl_0x0e(cpu: &mut Cpu) -> u8 {
     cpu.flags.z = if result == 0 { 1 } else { 0 };
     cpu.flags.n = if (result & 0x80) != 0 { 1 } else { 0 };
 
-    trace!("ASL[0x0E] Absolute");
+    trace_instruction!(cpu, "ASL", "0x0E", "Absolute");
     6
 }
 
@@ -105,6 +105,6 @@ pub(crate) fn asl_0x1e(cpu: &mut Cpu) -> u8 {
     cpu.flags.z = if result == 0 { 1 } else { 0 };
     cpu.flags.n = if (result & 0x80) != 0 { 1 } else { 0 };
 
-    trace!("ASL[0x1E] Absolute,X");
+    trace_instruction!(cpu, "ASL", "0x1E", "Absolute,X");
     7
 }

@@ -1,4 +1,4 @@
-use log::trace;
+use crate::trace_instruction;
 
 use crate::cpu::{
     cpu::Cpu,
@@ -20,7 +20,7 @@ pub(crate) fn and_0x29(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("AND[0x29] Immediate");
+    trace_instruction!(cpu, "AND", "0x29", "Immediate");
     2
 }
 
@@ -30,7 +30,7 @@ pub(crate) fn and_0x25(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("AND[0x25] Zeropage");
+    trace_instruction!(cpu, "AND", "0x25", "Zeropage");
     3
 }
 
@@ -40,7 +40,7 @@ pub(crate) fn and_0x35(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("AND[0x35] Zeropage,X");
+    trace_instruction!(cpu, "AND", "0x35", "Zeropage,X");
     4
 }
 
@@ -50,7 +50,7 @@ pub(crate) fn and_0x2d(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("AND[0x2D] Absolute");
+    trace_instruction!(cpu, "AND", "0x2D", "Absolute");
     4
 }
 
@@ -60,7 +60,7 @@ pub(crate) fn and_0x3d(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("AND[0x3D] Absolute,X");
+    trace_instruction!(cpu, "AND", "0x3D", "Absolute,X");
     if page_crossed { 5 } else { 4 }
 }
 
@@ -70,7 +70,7 @@ pub(crate) fn and_0x39(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("AND[0x39] Absolute,Y");
+    trace_instruction!(cpu, "AND", "0x39", "Absolute,Y");
     if page_crossed { 5 } else { 4 }
 }
 
@@ -80,7 +80,7 @@ pub(crate) fn and_0x21(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("AND[0x21] (Indirect,X)");
+    trace_instruction!(cpu, "AND", "0x21", "(Indirect,X)");
     6
 }
 
@@ -90,6 +90,6 @@ pub(crate) fn and_0x31(cpu: &mut Cpu) -> u8 {
 
     set_val(cpu, operand);
 
-    trace!("AND[0x31] (Indirect),Y");
+    trace_instruction!(cpu, "AND", "0x31", "(Indirect),Y");
     if page_crossed { 6 } else { 5 }
 }
