@@ -1,5 +1,6 @@
 use super::{flags::Flags, instruction_table::arrange_instruction_table, registers::Registers};
 use crate::mem::ram::Ram;
+use log::{debug, trace};
 
 pub struct Cpu {
     pub(super) registers: Registers,
@@ -74,17 +75,47 @@ impl Cpu {
     }
 
     pub fn load_program(&mut self, program: &[u8], addr: u16) {
+        debug!(
+            "Loading program of {} bytes at address {:#06X}",
+            program.len(),
+            addr
+        );
         for (i, &byte) in program.iter().enumerate() {
             self.memory.data[addr as usize + i] = byte;
         }
         self.registers.pc = addr;
+        debug!("Program loaded, PC set to {:#06X}", self.registers.pc);
+    }
+
+    /// Prints current CPU state for debugging
+    pub fn trace_state(&self) -> String {
+        format!(
+            "A:{:02X} X:{:02X} Y:{:02X} PC:{:04X} SP:{:02X} | N:{} V:{} B:{} D:{} I:{} Z:{} C:{}",
+            self.registers.a,
+            self.registers.x,
+            self.registers.y,
+            self.registers.pc,
+            self.registers.sp,
+            self.flags.n,
+            self.flags.v,
+            self.flags.b,
+            self.flags.d,
+            self.flags.i,
+            self.flags.z,
+            self.flags.c
+        )
     }
 
     pub fn run(&mut self) {
         let mut _total_cycles: u64 = 0;
         let mut max_iterations: u32 = 10000; // Add a safety limit to prevent infinite loops in tests
 
+        debug!("CPU starting execution at PC={:#06X}", self.registers.pc);
+        debug!("Initial state: {}", self.trace_state());
+
         loop {
+            trace!("PC={:#06X} | {}", self.registers.pc, self.trace_state());
+
             let opcode = self.fetch_byte();
 
             if opcode as usize >= self.instructions.len() {
@@ -98,6 +129,12 @@ impl Cpu {
 
             max_iterations -= 1;
             if self.exit || max_iterations == 0 {
+                if max_iterations == 0 {
+                    debug!("CPU halted: reached iteration limit");
+                } else {
+                    debug!("CPU halted: exit flag set");
+                }
+                debug!("Final state: {}", self.trace_state());
                 break;
             }
         }
