@@ -1,5 +1,3 @@
-use log::trace;
-
 use crate::cpu::{
     cpu::Cpu,
     instructions::addr_utils::{addr_absolute, addr_zeropage},
