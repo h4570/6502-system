@@ -1,7 +1,7 @@
 use super::instructions::{
     adc, and, asl, bcc, bcs, beq, bit, bmi, bne, bpl, brk, bvc, bvs, clc, cld, cli, clv, cmp, cpx,
     cpy, dec, dex, dey, eor, inc, inx, iny, jmp, jsr, lda, ldx, ldy, lsr, nop, ora, pha, pla, rts,
-    sbc, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
+    sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
 };
 use crate::cpu::cpu::Cpu;
 
@@ -178,4 +178,9 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0xD8] = cld::cld_0xd8; // CLD
     cpu_instructions[0x58] = cli::cli_0x58; // CLI
     cpu_instructions[0xB8] = clv::clv_0xb8; // CLV
+    
+    // Set flag instructions
+    cpu_instructions[0x38] = sec::sec_0x38; // SEC
+    cpu_instructions[0xF8] = sed::sed_0xf8; // SED
+    cpu_instructions[0x78] = sei::sei_0x78; // SEI
 }

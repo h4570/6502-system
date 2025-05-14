@@ -45,3 +45,6 @@ pub mod tsx_tests;
 pub mod txa_tests;
 pub mod txs_tests;
 pub mod tya_tests;
+pub mod sec_tests;
+pub mod sed_tests;
+pub mod sei_tests;

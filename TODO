@@ -38,9 +38,6 @@
 // ROR - rotate right
 
 // RTI - return from interrupt
-// SEC - set carry
-// SED - set decimal
-// SEI - set interrupt disable
 
 // == CPU - Obsługa cykli
 // == CPU - Dodanie "-i / --input mem.bin", który wciągnie konkretny plik
