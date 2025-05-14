@@ -41,6 +41,7 @@ pub mod pla;
 pub mod plp;
 pub mod rol;
 pub mod ror;
+pub mod rti;
 pub mod rts;
 pub mod sbc;
 pub mod sec;

@@ -38,6 +38,7 @@ pub mod pla_tests;
 pub mod plp_tests;
 pub mod rol_tests;
 pub mod ror_tests;
+pub mod rti_tests;
 pub mod rts_tests;
 pub mod sbc_tests;
 pub mod sta_tests;

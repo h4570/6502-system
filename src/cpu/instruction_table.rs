@@ -1,7 +1,7 @@
 use super::instructions::{
     adc, and, asl, bcc, bcs, beq, bit, bmi, bne, bpl, brk, bvc, bvs, clc, cld, cli, clv, cmp, cpx,
     cpy, dec, dex, dey, eor, inc, inx, iny, jmp, jsr, lda, ldx, ldy, lsr, nop, ora, pha, php, pla,
-    plp, rol, ror, rts, sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
+    plp, rol, ror, rti, rts, sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
 };
 use crate::cpu::cpu::Cpu;
 
@@ -19,6 +19,8 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0x08] = php::php_0x08;
     // PLP
     cpu_instructions[0x28] = plp::plp_0x28;
+    // RTI
+    cpu_instructions[0x40] = rti::rti_0x40;
     // BIT
     cpu_instructions[0x24] = bit::bit_0x24;
     cpu_instructions[0x2c] = bit::bit_0x2c;
