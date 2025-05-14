@@ -32,10 +32,6 @@
 
 // ==== TODO:
 // == CPU - Obsługa instrukcji
-// ASL - arithmetic shift left
-// BIT - bit test
-// LSR - logical shift right
-
 // PHP - push processor status (SR)
 // PLP - pull processor status (SR)
 // ROL - rotate left
