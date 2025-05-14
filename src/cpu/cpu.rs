@@ -1,4 +1,7 @@
-use super::{flags::Flags, instruction_table::arrange_instruction_table, registers::Registers};
+use super::{
+    flags::Flags, instruction_table::arrange_instruction_table, registers::Registers,
+    utils::trace_state,
+};
 use crate::mem::ram::Ram;
 use log::{debug, trace};
 
@@ -45,18 +48,6 @@ impl Cpu {
         return val;
     }
 
-    /// Returns processor status byte combining all flags
-    pub fn get_processor_status(&self) -> u8 {
-        (self.flags.n << 7)     // Negative flag (bit 7)
-            | (self.flags.v << 6)    // Overflow flag (bit 6)
-            | (1 << 5)               // Unused bit, always set to 1 (bit 5)
-            | (self.flags.b << 4)    // Break flag (bit 4)
-            | (self.flags.d << 3)    // Decimal mode flag (bit 3)
-            | (self.flags.i << 2)    // Interrupt disable flag (bit 2)
-            | (self.flags.z << 1)    // Zero flag (bit 1)
-            | self.flags.c // Carry flag (bit 0)
-    }
-
     pub fn reset(&mut self) {
         self.registers.a = 0;
         self.registers.x = 0;
@@ -80,34 +71,15 @@ impl Cpu {
         debug!("Program loaded, PC set to {:#06X}", self.registers.pc);
     }
 
-    /// Prints current CPU state for debugging
-    pub fn trace_state(&self) -> String {
-        format!(
-            "A:{:02X} X:{:02X} Y:{:02X} PC:{:04X} SP:{:02X} | N:{} V:{} B:{} D:{} I:{} Z:{} C:{}",
-            self.registers.a,
-            self.registers.x,
-            self.registers.y,
-            self.registers.pc,
-            self.registers.sp,
-            self.flags.n,
-            self.flags.v,
-            self.flags.b,
-            self.flags.d,
-            self.flags.i,
-            self.flags.z,
-            self.flags.c
-        )
-    }
-
     pub fn endless_run(&mut self) {
         let max_cycles: u64 = 10000 * 10; // Approx 10000 iterations
         debug!("CPU starting execution at PC={:#06X}", self.registers.pc);
-        debug!("Initial state: {}", self.trace_state());
+        debug!("Initial state: {}", trace_state(self));
 
         let total_cycles = self.step(max_cycles);
 
         debug!("CPU halted: executed {} cycles", total_cycles);
-        debug!("Final state: {}", self.trace_state());
+        debug!("Final state: {}", trace_state(self));
     }
 
     pub fn run(&mut self, cycles_to_run: u64) -> u64 {
@@ -115,12 +87,12 @@ impl Cpu {
             "CPU running for {} cycles from PC={:#06X}",
             cycles_to_run, self.registers.pc
         );
-        debug!("Initial state: {}", self.trace_state());
+        debug!("Initial state: {}", trace_state(self));
 
         let cycles_executed = self.step(cycles_to_run);
 
         debug!("CPU executed {} cycles", cycles_executed);
-        debug!("Final state: {}", self.trace_state());
+        debug!("Final state: {}", trace_state(self));
 
         cycles_executed
     }
