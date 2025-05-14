@@ -34,6 +34,8 @@ pub mod nop_tests;
 pub mod ora_tests;
 pub mod pha_tests;
 pub mod pla_tests;
+pub mod rol_tests;
+pub mod ror_tests;
 pub mod rts_tests;
 pub mod sbc_tests;
 pub mod sta_tests;

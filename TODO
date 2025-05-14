@@ -34,8 +34,6 @@
 // == CPU - Obsługa instrukcji
 // PHP - push processor status (SR)
 // PLP - pull processor status (SR)
-// ROL - rotate left
-// ROR - rotate right
 
 // RTI - return from interrupt
 

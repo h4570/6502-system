@@ -1,6 +1,6 @@
 use super::instructions::{
     adc, and, asl, bcc, bcs, beq, bit, bmi, bne, bpl, brk, bvc, bvs, clc, cld, cli, clv, cmp, cpx,
-    cpy, dec, dex, dey, eor, inc, inx, iny, jmp, jsr, lda, ldx, ldy, lsr, nop, ora, pha, pla, rts,
+    cpy, dec, dex, dey, eor, inc, inx, iny, jmp, jsr, lda, ldx, ldy, lsr, nop, ora, pha, pla, rol, ror, rts,
     sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
 };
 use crate::cpu::cpu::Cpu;
@@ -183,4 +183,18 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0x38] = sec::sec_0x38; // SEC
     cpu_instructions[0xF8] = sed::sed_0xf8; // SED
     cpu_instructions[0x78] = sei::sei_0x78; // SEI
+
+    // ROL
+    cpu_instructions[0x2A] = rol::rol_0x2a; // ROL A
+    cpu_instructions[0x26] = rol::rol_0x26; // ROL Zero Page
+    cpu_instructions[0x36] = rol::rol_0x36; // ROL Zero Page,X
+    cpu_instructions[0x2E] = rol::rol_0x2e; // ROL Absolute
+    cpu_instructions[0x3E] = rol::rol_0x3e; // ROL Absolute,X
+    
+    // ROR
+    cpu_instructions[0x6A] = ror::ror_0x6a; // ROR A
+    cpu_instructions[0x66] = ror::ror_0x66; // ROR Zero Page
+    cpu_instructions[0x76] = ror::ror_0x76; // ROR Zero Page,X
+    cpu_instructions[0x6E] = ror::ror_0x6e; // ROR Absolute
+    cpu_instructions[0x7E] = ror::ror_0x7e; // ROR Absolute,X
 }

@@ -37,6 +37,8 @@ pub mod nop;
 pub mod ora;
 pub mod pha;
 pub mod pla;
+pub mod rol;
+pub mod ror;
 pub mod rts;
 pub mod sbc;
 pub mod sec;
