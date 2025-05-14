@@ -1,7 +1,7 @@
 use super::instructions::{
     adc, and, asl, bcc, bcs, beq, bit, bmi, bne, bpl, brk, bvc, bvs, clc, cld, cli, clv, cmp, cpx,
-    cpy, dec, dex, dey, eor, inc, inx, iny, jmp, jsr, lda, ldx, ldy, lsr, nop, ora, pha, pla, rol, ror, rts,
-    sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
+    cpy, dec, dex, dey, eor, inc, inx, iny, jmp, jsr, lda, ldx, ldy, lsr, nop, ora, pha, php, pla,
+    plp, rol, ror, rts, sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
 };
 use crate::cpu::cpu::Cpu;
 
@@ -15,6 +15,10 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0xB9] = lda::lda_0xb9;
     cpu_instructions[0xA1] = lda::lda_0xa1;
     cpu_instructions[0xB1] = lda::lda_0xb1;
+    // PHP
+    cpu_instructions[0x08] = php::php_0x08;
+    // PLP
+    cpu_instructions[0x28] = plp::plp_0x28;
     // BIT
     cpu_instructions[0x24] = bit::bit_0x24;
     cpu_instructions[0x2c] = bit::bit_0x2c;
@@ -178,7 +182,7 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0xD8] = cld::cld_0xd8; // CLD
     cpu_instructions[0x58] = cli::cli_0x58; // CLI
     cpu_instructions[0xB8] = clv::clv_0xb8; // CLV
-    
+
     // Set flag instructions
     cpu_instructions[0x38] = sec::sec_0x38; // SEC
     cpu_instructions[0xF8] = sed::sed_0xf8; // SED
@@ -190,7 +194,7 @@ pub(crate) fn arrange_instruction_table(cpu_instructions: &mut [fn(&mut Cpu) -> 
     cpu_instructions[0x36] = rol::rol_0x36; // ROL Zero Page,X
     cpu_instructions[0x2E] = rol::rol_0x2e; // ROL Absolute
     cpu_instructions[0x3E] = rol::rol_0x3e; // ROL Absolute,X
-    
+
     // ROR
     cpu_instructions[0x6A] = ror::ror_0x6a; // ROR A
     cpu_instructions[0x66] = ror::ror_0x66; // ROR Zero Page

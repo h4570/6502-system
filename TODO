@@ -32,9 +32,6 @@
 
 // ==== TODO:
 // == CPU - Obsługa instrukcji
-// PHP - push processor status (SR)
-// PLP - pull processor status (SR)
-
 // RTI - return from interrupt
 
 // == CPU - Obsługa cykli
