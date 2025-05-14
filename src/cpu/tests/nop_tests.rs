@@ -20,7 +20,7 @@ mod nop_tests {
         // Execute NOP and BRK
         let program = vec![0xEA, 0x00]; // NOP, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         // Verify that NOP didn't change any registers or flags
         assert_eq!(cpu.registers.a, initial_a);
@@ -38,7 +38,7 @@ mod nop_tests {
         // Execute 5 NOPs and BRK
         let program = vec![0xEA, 0xEA, 0xEA, 0xEA, 0xEA, 0x00]; // 5 NOPs, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         // Verify that NOPs didn't change the A register
         assert_eq!(cpu.registers.a, 0x42);

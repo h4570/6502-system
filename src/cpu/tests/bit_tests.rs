@@ -9,7 +9,7 @@ mod bit_tests {
         cpu.memory.data[0x42] = 0b01010101; // 85 (0x55)
         let program = vec![0x24, 0x42, 0x00]; // BIT $42, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         // AND result is 0, but register A should not change
         assert_eq!(cpu.registers.a, 0xAA);
         // Result is zero
@@ -27,7 +27,7 @@ mod bit_tests {
         cpu.memory.data[0x42] = 0b11000000; // 192 (0xC0)
         let program = vec![0x24, 0x42, 0x00]; // BIT $42, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         // AND result is 0, but register A should not change
         assert_eq!(cpu.registers.a, 0x01);
         // Result is zero
@@ -45,7 +45,7 @@ mod bit_tests {
         cpu.memory.data[0x42] = 0b00000011; // 3
         let program = vec![0x24, 0x42, 0x00]; // BIT $42, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         // AND result is non-zero (3), but register A should not change
         assert_eq!(cpu.registers.a, 0x03);
         // Result is not zero
@@ -63,7 +63,7 @@ mod bit_tests {
         cpu.memory.data[0x4242] = 0b11010101; // 213 (0xD5)
         let program = vec![0x2C, 0x42, 0x42, 0x00]; // BIT $4242, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         // AND result is non-zero, but register A should not change
         assert_eq!(cpu.registers.a, 0xAA);
         // Result is not zero

@@ -12,7 +12,7 @@ mod sei_tests {
         
         let program = vec![0x78, 0x00]; // SEI, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         assert_eq!(cpu.flags.i, 1, "Interrupt flag should be set");
     }
@@ -31,7 +31,7 @@ mod sei_tests {
         
         let program = vec![0x78, 0x00]; // SEI, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         // Check interrupt is set
         assert_eq!(cpu.flags.i, 1, "Interrupt flag should be set");

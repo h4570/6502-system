@@ -18,7 +18,7 @@ mod php_tests {
 
         let program = vec![0x08, 0x00]; // PHP, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
 
         // Stack pointer should be decremented
         assert_eq!(cpu.registers.sp, 0xFE);
@@ -44,7 +44,7 @@ mod php_tests {
 
         let program = vec![0x08, 0x00]; // PHP, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
 
         // Check the value on the stack
         // The value should be 11111111 = 0xFF
@@ -66,7 +66,7 @@ mod php_tests {
 
         let program = vec![0x08, 0x00]; // PHP, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
 
         // Check the value on the stack
         // The value should be 00110000 = 0x30 (only bits 4 and 5 are set)

@@ -39,13 +39,6 @@ impl Cpu {
         cpu
     }
 
-    fn unknown_opcode(&mut self) -> u8 {
-        panic!(
-            "Unknown opcode: {:#04x}",
-            self.memory.data[self.registers.pc as usize - 1]
-        );
-    }
-
     pub(super) fn fetch_byte(&mut self) -> u8 {
         let val = self.memory.data[self.registers.pc as usize];
         self.registers.pc += 1;
@@ -106,37 +99,56 @@ impl Cpu {
         )
     }
 
-    pub fn run(&mut self) {
-        let mut _total_cycles: u64 = 0;
-        let mut max_iterations: u32 = 10000; // Add a safety limit to prevent infinite loops in tests
-
+    pub fn endless_run(&mut self) {
+        let max_cycles: u64 = 10000 * 10; // Approx 10000 iterations
         debug!("CPU starting execution at PC={:#06X}", self.registers.pc);
         debug!("Initial state: {}", self.trace_state());
 
-        loop {
-            trace!("PC={:#06X} | {}", self.registers.pc, self.trace_state());
+        let total_cycles = self.step(max_cycles);
 
-            let opcode = self.fetch_byte();
+        debug!("CPU halted: executed {} cycles", total_cycles);
+        debug!("Final state: {}", self.trace_state());
+    }
 
-            if opcode as usize >= self.instructions.len() {
-                panic!("Opcode is out of bounds! {:#04x}", opcode);
+    pub fn run(&mut self, cycles_to_run: u64) -> u64 {
+        debug!(
+            "CPU running for {} cycles from PC={:#06X}",
+            cycles_to_run, self.registers.pc
+        );
+        debug!("Initial state: {}", self.trace_state());
+
+        let cycles_executed = self.step(cycles_to_run);
+
+        debug!("CPU executed {} cycles", cycles_executed);
+        debug!("Final state: {}", self.trace_state());
+
+        cycles_executed
+    }
+
+    fn step(&mut self, cycles_to_run: u64) -> u64 {
+        let mut cycles_executed: u64 = 0;
+        let mut remaining_cycles: u8 = 0;
+
+        while cycles_executed < cycles_to_run && !self.exit {
+            // If we are not doing instruction currently, get new one.
+            if remaining_cycles == 0 {
+                let opcode = self.fetch_byte();
+                trace!("Loading instruction at {:#04x}", opcode);
+                let instruction = self.instructions[opcode as usize];
+                remaining_cycles = instruction(self);
             }
 
-            let instruction = self.instructions[opcode as usize];
-            let cycles: u8 = instruction(self);
-
-            _total_cycles += cycles as u64;
-
-            max_iterations -= 1;
-            if self.exit || max_iterations == 0 {
-                if max_iterations == 0 {
-                    debug!("CPU halted: reached iteration limit");
-                } else {
-                    debug!("CPU halted: exit flag set");
-                }
-                debug!("Final state: {}", self.trace_state());
-                break;
-            }
+            remaining_cycles -= 1;
+            cycles_executed += 1;
         }
+
+        cycles_executed
+    }
+
+    fn unknown_opcode(&mut self) -> u8 {
+        panic!(
+            "Tried to execute instruction at unknown opcode: {:#04x}",
+            self.memory.data[self.registers.pc as usize - 1]
+        );
     }
 }

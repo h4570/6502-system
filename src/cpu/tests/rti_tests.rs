@@ -45,7 +45,7 @@ mod rti_tests {
         let program = vec![0x40]; // RTI
         cpu.load_program(&program, 0x8000);
         debug!("PC before run: {:#06x}", cpu.registers.pc);
-        cpu.run();
+        cpu.endless_run();
         // Verify CPU state after RTI
         debug!("Expected PC: 0x8420, Actual PC: {:#06x}", cpu.registers.pc);
         debug!(
@@ -96,7 +96,7 @@ mod rti_tests {
         let program = vec![0x40]; // RTI
         cpu.load_program(&program, 0x8000);
         debug!("PC before run: {:#06x}", cpu.registers.pc);
-        cpu.run();
+        cpu.endless_run();
 
         // Calculate what the status byte should be after RTI
         let calculated_status = ((cpu.flags.n as u8) << 7) |
@@ -160,7 +160,7 @@ mod rti_tests {
         debug!("PC before run: {:#06x}", cpu.registers.pc);
 
         // Run the program
-        cpu.run();
+        cpu.endless_run();
 
         // Debug output
         debug!("Expected PC: 0x8420, Actual PC: {:#06x}", cpu.registers.pc);

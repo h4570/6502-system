@@ -17,7 +17,7 @@ mod jmp_tests {
         cpu.memory.data[0x4242] = 0x00; // BRK
 
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
 
         // The PC should have jumped to $4242 and then increased by 1 after executing BRK
         assert_eq!(cpu.registers.pc, 0x4243);
@@ -41,7 +41,7 @@ mod jmp_tests {
         cpu.memory.data[0x4242] = 0x00; // BRK
 
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
 
         // The PC should have jumped to $4242 and then increased by 1 after executing BRK
         assert_eq!(cpu.registers.pc, 0x4243);
@@ -65,7 +65,7 @@ mod jmp_tests {
         cpu.memory.data[0x4242] = 0x00; // BRK
 
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
 
         // The PC should have jumped to $4242 and then increased by 1 after executing BRK
         assert_eq!(cpu.registers.pc, 0x4243);

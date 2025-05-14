@@ -8,7 +8,7 @@ mod txs_tests {
         let mut cpu = Cpu::new(Ram::new());
         let program = vec![0xA2, 0x42, 0x9A, 0x00]; // LDX #$42, TXS, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.x, 0x42);
         assert_eq!(cpu.registers.sp, 0x42);
     }
@@ -18,7 +18,7 @@ mod txs_tests {
         let mut cpu = Cpu::new(Ram::new());
         let program = vec![0xA2, 0x00, 0x9A, 0x00]; // LDX #$00, TXS, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.x, 0x00);
         assert_eq!(cpu.registers.sp, 0x00);
         // Note: TXS doesn't affect any flags
@@ -29,7 +29,7 @@ mod txs_tests {
         let mut cpu = Cpu::new(Ram::new());
         let program = vec![0xA2, 0xFF, 0x9A, 0x00]; // LDX #$FF, TXS, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.x, 0xFF);
         assert_eq!(cpu.registers.sp, 0xFF);
         // Note: TXS doesn't affect any flags

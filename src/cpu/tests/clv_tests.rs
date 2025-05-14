@@ -9,7 +9,7 @@ mod clv_tests {
         cpu.flags.v = 1;
         let program = vec![0xB8, 0x00]; // CLV, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.flags.v, 0);
     }
 
@@ -19,7 +19,7 @@ mod clv_tests {
         cpu.flags.v = 0;
         let program = vec![0xB8, 0x00]; // CLV, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.flags.v, 0);
     }
 }

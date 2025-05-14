@@ -9,7 +9,7 @@ mod tsx_tests {
         cpu.registers.sp = 0x42;
         let program = vec![0xBA, 0x00]; // TSX, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.sp, 0x42);
         assert_eq!(cpu.registers.x, 0x42);
         assert_eq!(cpu.flags.z, 0);
@@ -22,7 +22,7 @@ mod tsx_tests {
         cpu.registers.sp = 0x00;
         let program = vec![0xBA, 0x00]; // TSX, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.sp, 0x00);
         assert_eq!(cpu.registers.x, 0x00);
         assert_eq!(cpu.flags.z, 1);
@@ -35,7 +35,7 @@ mod tsx_tests {
         cpu.registers.sp = 0x80;
         let program = vec![0xBA, 0x00]; // TSX, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.sp, 0x80);
         assert_eq!(cpu.registers.x, 0x80);
         assert_eq!(cpu.flags.z, 0);

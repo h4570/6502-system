@@ -14,7 +14,7 @@ mod pla_tests {
         
         let program = vec![0x68, 0x00]; // PLA, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         // Check if accumulator has the pulled value
         assert_eq!(cpu.registers.a, 0x42);
@@ -35,7 +35,7 @@ mod pla_tests {
         
         let program = vec![0x68, 0x00]; // PLA, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         assert_eq!(cpu.registers.a, 0x00);
         // Zero flag should be set
@@ -53,7 +53,7 @@ mod pla_tests {
         
         let program = vec![0x68, 0x00]; // PLA, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         assert_eq!(cpu.registers.a, 0x80);
         // Zero flag should be clear
@@ -72,7 +72,7 @@ mod pla_tests {
         
         let program = vec![0x68, 0x00]; // PLA, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         assert_eq!(cpu.registers.a, 0x37);
         // Stack pointer should be 0x00 after increment from 0xFF

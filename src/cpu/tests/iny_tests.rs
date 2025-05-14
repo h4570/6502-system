@@ -9,7 +9,7 @@ mod iny_tests {
         cpu.registers.y = 0x05;
         let program = vec![0xC8, 0x00]; // INY, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.y, 0x06);
         assert_eq!(cpu.flags.z, 0);
         assert_eq!(cpu.flags.n, 0);
@@ -21,7 +21,7 @@ mod iny_tests {
         cpu.registers.y = 0xFF;
         let program = vec![0xC8, 0x00]; // INY, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.y, 0x00);
         assert_eq!(cpu.flags.z, 1);
         assert_eq!(cpu.flags.n, 0);
@@ -33,7 +33,7 @@ mod iny_tests {
         cpu.registers.y = 0x7F;
         let program = vec![0xC8, 0x00]; // INY, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.y, 0x80);
         assert_eq!(cpu.flags.z, 0);
         assert_eq!(cpu.flags.n, 1);

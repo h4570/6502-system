@@ -11,7 +11,7 @@ mod bcc_tests {
         // BCC +2, NOP, NOP, LDA #$42, BRK
         let program = vec![0x90, 0x02, 0xEA, 0xEA, 0xA9, 0x42, 0x00];
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x42); // Check that we branched to LDA instruction
     }
 
@@ -23,7 +23,7 @@ mod bcc_tests {
         // BCC +3, LDA #$42, BRK, NOP, LDA #$24, BRK
         let program = vec![0x90, 0x03, 0xA9, 0x42, 0x00, 0xEA, 0xA9, 0x24, 0x00];
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x42); // Check that we didn't branch
     }
 
@@ -58,7 +58,7 @@ mod bcc_tests {
         ];
 
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
 
         // 10 + 20 + 30 + 40 + 200 = 300 (0x12C), but 8-bit can only store 0x2C with carry set
         assert_eq!(cpu.memory.data[0x70], 0x2C); // Sum should be 300 mod 256 = 44
@@ -84,7 +84,7 @@ mod bcc_tests {
         cpu.load_program(&target_program, target_addr);
 
         cpu.registers.pc = program_addr;
-        cpu.run();
+        cpu.endless_run();
 
         assert_eq!(cpu.registers.a, 0x42); // Verify we executed the instruction after the page boundary
     }

@@ -8,7 +8,7 @@ mod lda_tests {
         let mut cpu = Cpu::new(Ram::new());
         let program = vec![0xA9, 0x42, 0x00]; // LDA #$42, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x42);
         assert_eq!(cpu.flags.z, 0);
         assert_eq!(cpu.flags.n, 0);
@@ -19,7 +19,7 @@ mod lda_tests {
         let mut cpu = Cpu::new(Ram::new());
         let program = vec![0xA9, 0x00, 0x00]; // LDA #$00, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x00);
         assert_eq!(cpu.flags.z, 1);
         assert_eq!(cpu.flags.n, 0);
@@ -30,7 +30,7 @@ mod lda_tests {
         let mut cpu = Cpu::new(Ram::new());
         let program = vec![0xA9, 0x80, 0x00]; // LDA #$80, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x80);
         assert_eq!(cpu.flags.z, 0);
         assert_eq!(cpu.flags.n, 1);
@@ -42,7 +42,7 @@ mod lda_tests {
         cpu.memory.data[0x42] = 0x37;
         let program = vec![0xA5, 0x42, 0x00]; // LDA $42, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x37);
     }
 
@@ -52,7 +52,7 @@ mod lda_tests {
         cpu.memory.data[0x4242] = 0x37;
         let program = vec![0xAD, 0x42, 0x42, 0x00]; // LDA $4242, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x37);
     }
 
@@ -63,7 +63,7 @@ mod lda_tests {
         cpu.memory.data[0x47] = 0x37; // 0x42 + 0x05 = 0x47
         let program = vec![0xB5, 0x42, 0x00]; // LDA $42,X, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x37);
     }
 
@@ -74,7 +74,7 @@ mod lda_tests {
         cpu.memory.data[0x424A] = 0x37; // 0x4242 + 0x08 = 0x424A
         let program = vec![0xBD, 0x42, 0x42, 0x00]; // LDA $4242,X, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x37);
     }
 
@@ -85,7 +85,7 @@ mod lda_tests {
         cpu.memory.data[0x4341] = 0x37; // 0x4242 + 0xFF = 0x4341 (page boundary crossed)
         let program = vec![0xBD, 0x42, 0x42, 0x00]; // LDA $4242,X, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x37);
     }
 
@@ -96,7 +96,7 @@ mod lda_tests {
         cpu.memory.data[0x424A] = 0x37; // 0x4242 + 0x08 = 0x424A
         let program = vec![0xB9, 0x42, 0x42, 0x00]; // LDA $4242,Y, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x37);
     }
 
@@ -107,7 +107,7 @@ mod lda_tests {
         cpu.memory.data[0x4341] = 0x37; // 0x4242 + 0xFF = 0x4341 (page boundary crossed)
         let program = vec![0xB9, 0x42, 0x42, 0x00]; // LDA $4242,Y, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x37);
     }
 
@@ -122,7 +122,7 @@ mod lda_tests {
         cpu.memory.data[0x3742] = 0x84;
         let program = vec![0xA1, 0x1C, 0x00]; // LDA ($1C,X), BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x84);
     }
 
@@ -137,7 +137,7 @@ mod lda_tests {
         cpu.memory.data[0x3746] = 0x84; // 0x3742 + 0x04 = 0x3746
         let program = vec![0xB1, 0x40, 0x00]; // LDA ($40),Y, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x84);
     }
 
@@ -152,7 +152,7 @@ mod lda_tests {
         cpu.memory.data[0x3841] = 0x84; // 0x3742 + 0xFF = 0x3841 (page boundary crossed)
         let program = vec![0xB1, 0x40, 0x00]; // LDA ($40),Y, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.registers.a, 0x84);
     }
 }

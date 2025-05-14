@@ -9,7 +9,7 @@ mod clc_tests {
         cpu.flags.c = 1;
         let program = vec![0x18, 0x00]; // CLC, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.flags.c, 0);
     }
 
@@ -19,7 +19,7 @@ mod clc_tests {
         cpu.flags.c = 0;
         let program = vec![0x18, 0x00]; // CLC, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.flags.c, 0);
     }
 }

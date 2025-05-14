@@ -14,7 +14,7 @@ mod pha_tests {
         
         let program = vec![0x48, 0x00]; // PHA, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         // Check if the value was correctly pushed to the stack
         assert_eq!(cpu.memory.data[0x01FF], 0x42); // Stack starts at 0x0100 + SP
@@ -32,7 +32,7 @@ mod pha_tests {
         
         let program = vec![0x48, 0x00]; // PHA, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         // Check if value was pushed correctly
         assert_eq!(cpu.memory.data[0x0100], 0x37);

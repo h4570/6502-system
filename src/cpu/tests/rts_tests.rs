@@ -29,7 +29,7 @@ mod rts_tests {
         program[0x11] = 0x60; // RTS
 
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
 
         // Check that we executed both the subroutine and made it back to the NOP
         // After the NOP, we should have hit the BRK, so PC should be at $8005

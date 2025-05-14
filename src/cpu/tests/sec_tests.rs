@@ -12,7 +12,7 @@ mod sec_tests {
         
         let program = vec![0x38, 0x00]; // SEC, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         assert_eq!(cpu.flags.c, 1, "Carry flag should be set");
     }
@@ -31,7 +31,7 @@ mod sec_tests {
         
         let program = vec![0x38, 0x00]; // SEC, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         // Check carry is set
         assert_eq!(cpu.flags.c, 1, "Carry flag should be set");

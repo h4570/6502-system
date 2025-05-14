@@ -9,7 +9,7 @@ mod cli_tests {
         cpu.flags.i = 1;
         let program = vec![0x58, 0x00]; // CLI, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.flags.i, 0);
     }
 
@@ -19,7 +19,7 @@ mod cli_tests {
         cpu.flags.i = 0;
         let program = vec![0x58, 0x00]; // CLI, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.flags.i, 0);
     }
 }

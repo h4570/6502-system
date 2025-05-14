@@ -15,7 +15,7 @@ mod plp_tests {
 
         let program = vec![0x28, 0x00]; // PLP, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
 
         // Stack pointer should be incremented
         assert_eq!(cpu.registers.sp, 0xFF);
@@ -39,7 +39,7 @@ mod plp_tests {
 
         let program = vec![0x28, 0x00]; // PLP, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
 
         // Verify all flags were set
         assert_eq!(cpu.flags.n, 1);
@@ -61,7 +61,7 @@ mod plp_tests {
 
         let program = vec![0x28, 0x00]; // PLP, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
 
         // Verify all flags were cleared
         assert_eq!(cpu.flags.n, 0);
@@ -96,7 +96,7 @@ mod plp_tests {
         ];
 
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
 
         // Verify flags were restored to initial values
         assert_eq!(cpu.flags.n, 1);

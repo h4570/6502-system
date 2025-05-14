@@ -12,7 +12,7 @@ mod sed_tests {
         
         let program = vec![0xF8, 0x00]; // SED, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         assert_eq!(cpu.flags.d, 1, "Decimal flag should be set");
     }
@@ -31,7 +31,7 @@ mod sed_tests {
         
         let program = vec![0xF8, 0x00]; // SED, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         
         // Check decimal is set
         assert_eq!(cpu.flags.d, 1, "Decimal flag should be set");

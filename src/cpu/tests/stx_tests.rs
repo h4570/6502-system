@@ -9,7 +9,7 @@ mod stx_tests {
         cpu.registers.x = 0x42;
         let program = vec![0x86, 0x20, 0x00]; // STX $20, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.memory.data[0x20], 0x42);
     }
 
@@ -20,7 +20,7 @@ mod stx_tests {
         cpu.registers.y = 0x05;
         let program = vec![0x96, 0x20, 0x00]; // STX $20,Y, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.memory.data[0x25], 0x42); // 0x20 + 0x05 = 0x25
     }
 
@@ -30,7 +30,7 @@ mod stx_tests {
         cpu.registers.x = 0x42;
         let program = vec![0x8E, 0x00, 0x40, 0x00]; // STX $4000, BRK
         cpu.load_program(&program, 0x8000);
-        cpu.run();
+        cpu.endless_run();
         assert_eq!(cpu.memory.data[0x4000], 0x42);
     }
 }
