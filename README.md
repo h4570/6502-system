@@ -1,5 +1,6 @@
-# 6502 Computer System Emulator
+# 6502 Computer System Emulator [WIP]
 
+Work in progress.  
 This project is an emulator for a hypothetical computer system based on the classic 6502 CPU with custom GPU and DMA controller.
 
 ## TODO list
