@@ -71,8 +71,12 @@ impl Cpu {
         debug!("Program loaded, PC set to {:#06X}", self.registers.pc);
     }
 
+    /// Run with default limit of 10000 * 10 cycles (approx 10k iterations)
     pub fn endless_run(&mut self) {
-        let max_cycles: u64 = 10000 * 10; // Approx 10000 iterations
+        self.endless_run_limit(10000 * 10);
+    }
+
+    pub fn endless_run_limit(&mut self, max_cycles: u64) {
         debug!("CPU starting execution at PC={:#06X}", self.registers.pc);
         debug!("Initial state: {}", trace_state(self));
 
