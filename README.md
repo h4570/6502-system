@@ -64,3 +64,5 @@ This emulator is currently under development. See the TODO list for upcoming fea
 ## License
 
 [License information]
+
+Check my blog at <a href="https://hasto.pl">hasto.pl</a>  
