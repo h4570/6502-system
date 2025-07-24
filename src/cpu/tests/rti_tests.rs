@@ -47,7 +47,7 @@ mod rti_tests {
         debug!("PC before run: {:#06x}", cpu.registers.pc);
         cpu.endless_run();
         // Verify CPU state after RTI
-        debug!("Expected PC: 0x8420, Actual PC: {:#06x}", cpu.registers.pc);
+        debug!("Expected PC: 0x8421, Actual PC: {:#06x}", cpu.registers.pc);
         debug!(
             "Expected test value: {:#04x} (binary: {:08b})",
             status_value, status_value
@@ -56,7 +56,7 @@ mod rti_tests {
             "Actual flags after RTI: N={} V={} D={} I={} Z={} C={}",
             cpu.flags.n, cpu.flags.v, cpu.flags.d, cpu.flags.i, cpu.flags.z, cpu.flags.c
         );
-        assert_eq!(cpu.registers.pc, 0x8420);
+        assert_eq!(cpu.registers.pc, 0x8421);
         assert_eq!(cpu.flags.n, 0);
         assert_eq!(cpu.flags.v, 0);
         assert_eq!(cpu.flags.d, 1);
@@ -118,7 +118,7 @@ mod rti_tests {
         );
 
         // Verify CPU state after RTI
-        assert_eq!(cpu.registers.pc, 0x8420);
+        assert_eq!(cpu.registers.pc, 0x8421);
         assert_eq!(cpu.flags.n, 1);
         assert_eq!(cpu.flags.v, 1);
         assert_eq!(cpu.flags.d, 1);
@@ -163,14 +163,14 @@ mod rti_tests {
         cpu.endless_run();
 
         // Debug output
-        debug!("Expected PC: 0x8420, Actual PC: {:#06x}", cpu.registers.pc);
+        debug!("Expected PC: 0x8421, Actual PC: {:#06x}", cpu.registers.pc);
         debug!(
             "Flag values: N={}, V={}, D={}, I={}, Z={}, C={}",
             cpu.flags.n, cpu.flags.v, cpu.flags.d, cpu.flags.i, cpu.flags.z, cpu.flags.c
         );
 
         // Check if RTI correctly restored the PC and flags
-        assert_eq!(cpu.registers.pc, 0x8420); // Returned to correct address
+        assert_eq!(cpu.registers.pc, 0x8421); // Returned to correct address
         assert_eq!(cpu.flags.n, 0);
         assert_eq!(cpu.flags.v, 0);
         assert_eq!(cpu.flags.d, 0);
