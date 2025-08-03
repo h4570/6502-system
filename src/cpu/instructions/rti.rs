@@ -20,6 +20,8 @@ pub(crate) fn rti_0x40(cpu: &mut Cpu) -> u8 {
     cpu.registers.sp = cpu.registers.sp.wrapping_add(1);
     let pc_hi = cpu.memory.data[0x0100 + cpu.registers.sp as usize] as u16;
 
+    // RTI restores the exact return address from the stack without adjustment.
+    // Unlike RTS, which increments the restored address by 1 (PC+1), RTI should not adjust the PC.
     cpu.registers.pc = (pc_hi << 8) | pc_lo;
 
     trace_instruction!(cpu, "RTI", "0x40", "Implied");
